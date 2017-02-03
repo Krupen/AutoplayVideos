@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.allattentionhere.autoplayvideos.Adapter.VideosAdapter;
 import com.allattentionhere.autoplayvideos.Viewholder.CustomViewHolder;
@@ -20,7 +21,6 @@ import java.util.List;
 
 public class CustomRecyclerView extends RecyclerView {
 
-    private List<String> urls = new ArrayList<>();
     private Activity _act;
 
     public CustomRecyclerView(Context context) {
@@ -64,8 +64,10 @@ public class CustomRecyclerView extends RecyclerView {
                         for (int i = firstCompletelyVisiblePosition; i <= lastCompletelyVisiblePosition; i++) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
-                                if (i >= 0 && holder instanceof CustomViewHolder && urls.get(i).endsWith(".mp4")) {
-                                    ((CustomViewHolder) holder).initVideoView(urls.get(i),_act);
+                                CustomViewHolder cvh = (CustomViewHolder)holder;
+                                if (i >= 0 && cvh!=null && cvh.getUrl().endsWith(".mp4")) {
+                                    Log.d("k9works", "works: ");
+                                    ((CustomViewHolder) holder).initVideoView(cvh.getUrl(),_act);
 //                                                                     ((NewHomeAdapter.ArticleViewHolder) holder).playVideo();
                                     Thread t = new Thread() {
                                         public void run() {
@@ -84,7 +86,9 @@ public class CustomRecyclerView extends RecyclerView {
                         for (int i = firstVisiblePosition; i < firstCompletelyVisiblePosition; i++) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
-                                if (i >= 0 && holder instanceof CustomViewHolder && urls.get(i).endsWith(".mp4")) {
+                                CustomViewHolder cvh = (CustomViewHolder)holder;
+                                if (i >= 0 && cvh!=null && cvh.getUrl().endsWith(".mp4")) {
+                                    Log.d("k9works", "works: ");
                                     ((CustomViewHolder) holder).pauseVideo();
                                 }
                             }
@@ -95,7 +99,9 @@ public class CustomRecyclerView extends RecyclerView {
                         for (int i = lastVisiblePosition; i > lastCompletelyVisiblePosition; i--) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
-                                if (i >= 0 && holder instanceof CustomViewHolder && urls.get(i).endsWith(".mp4")) {
+                                CustomViewHolder cvh = (CustomViewHolder)holder;
+                                if (i >= 0 && cvh!=null && cvh.getUrl().endsWith(".mp4")) {
+                                    Log.d("k9works", "works: ");
                                     ((CustomViewHolder) holder).pauseVideo();
                                 }
                             }
@@ -117,7 +123,5 @@ public class CustomRecyclerView extends RecyclerView {
         });
     }
 
-    public void setUrls(List<String> urls) {
-        this.urls = urls;
-    }
+
 }

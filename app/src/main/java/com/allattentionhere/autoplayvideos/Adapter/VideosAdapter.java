@@ -60,6 +60,7 @@ private int list_size;
     public void renderImageVideo(final CustomViewHolder vh, String url, Picasso p) {
         Log.d("trace", "renderCardAtPosition: ");
         if (url != null && !TextUtils.isEmpty(url)) {
+            //todo change logic
             String newurl = "";
             if (url.endsWith("mp4")) {
                 newurl = url.replace("mp4", "jpg").replace(",q_70", ",q_70,so_0");
@@ -102,6 +103,8 @@ private int list_size;
     public int getItemViewType(int position) {
         return 0;
     }
+
+
 
 
 }

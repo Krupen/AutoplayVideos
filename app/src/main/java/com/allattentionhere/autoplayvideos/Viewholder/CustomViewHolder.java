@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 
 public class CustomViewHolder extends RecyclerView.ViewHolder {
     private AAH_VideoImage aah_vi;
+    private String url;
 
     public CustomViewHolder(View x) {
         super(x);
@@ -53,5 +54,13 @@ public class CustomViewHolder extends RecyclerView.ViewHolder {
 
     public AAH_VideoImage getAah_vi() {
         return aah_vi;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

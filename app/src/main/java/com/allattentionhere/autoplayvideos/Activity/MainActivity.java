@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.set_act(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setUrls(urls_iv);
         recyclerView.setAdapter(mAdapter);
         //to init videos before scrolling
         recyclerView.smoothScrollBy(0,1);

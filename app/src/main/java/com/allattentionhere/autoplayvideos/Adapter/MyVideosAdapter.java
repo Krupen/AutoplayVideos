@@ -1,16 +1,10 @@
 package com.allattentionhere.autoplayvideos.Adapter;
 
-import android.app.Activity;
-import android.graphics.Bitmap;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.allattentionhere.autoplayvideos.Activity.MainActivity;
 import com.allattentionhere.autoplayvideos.Model.MyModel;
 import com.allattentionhere.autoplayvideos.R;
 import com.allattentionhere.autoplayvideos.Viewholder.CustomViewHolder;
@@ -24,7 +18,7 @@ import butterknife.ButterKnife;
 public class MyVideosAdapter extends VideosAdapter {
 
     private List<MyModel> list;
-    Picasso p;
+    Picasso picasso;
 
     public class MyCustomViewHolder extends CustomViewHolder {
 
@@ -38,7 +32,7 @@ public class MyVideosAdapter extends VideosAdapter {
 
     public MyVideosAdapter(List<MyModel> list_urls, Picasso p) {
         this.list = list_urls;
-        this.p = p;
+        this.picasso = p;
         //todo
         setList_size(list.size());
     }
@@ -55,7 +49,8 @@ public class MyVideosAdapter extends VideosAdapter {
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         ((MyCustomViewHolder) holder).tv.setText(list.get(position).getName());
         //todo
-        renderImageVideo(holder,list.get(position).getUrl(),p);
+        ((MyCustomViewHolder) holder).setUrl(list.get(position).getUrl());
+        renderImageVideo(holder,list.get(position).getUrl(), picasso);
     }
 
 
