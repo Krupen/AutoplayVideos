@@ -41,6 +41,8 @@ public class MyVideosAdapter extends VideosAdapter {
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.single_card, parent, false);
+        //todo
+        setLayout(R.layout.single_card);
         return new MyCustomViewHolder(itemView);
     }
 
@@ -49,7 +51,7 @@ public class MyVideosAdapter extends VideosAdapter {
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         ((MyCustomViewHolder) holder).tv.setText(list.get(position).getName());
         //todo
-        ((MyCustomViewHolder) holder).setUrl(list.get(position).getUrl());
+        holder.setUrl(list.get(position).getUrl());
         renderImageVideo(holder,list.get(position).getUrl(), picasso);
     }
 

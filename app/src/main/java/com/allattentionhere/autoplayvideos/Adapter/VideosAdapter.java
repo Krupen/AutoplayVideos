@@ -15,29 +15,20 @@ import com.allattentionhere.autoplayvideos.Viewholder.CustomViewHolder;
 import com.squareup.picasso.Picasso;
 
 
-
 public class VideosAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
 
-private int list_size;
+    private int list_size;
+    private int layout;
 
     public VideosAdapter() {
     }
 
-    public class MyCustomViewHolder extends CustomViewHolder {
-
-        public MyCustomViewHolder(View x) {
-            super(x);
-        }
-
-    }
-
-
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_card, parent, false);
-        return new MyCustomViewHolder(itemView);
+                .inflate(layout, parent, false);
+        return new CustomViewHolder(itemView);
     }
 
 
@@ -48,8 +39,9 @@ private int list_size;
 
     @Override
     public void onViewDetachedFromWindow(final CustomViewHolder holder) {
-        if (holder instanceof MyCustomViewHolder) {
-            MyCustomViewHolder viewHolder = (MyCustomViewHolder) holder;
+        if (holder instanceof CustomViewHolder) {
+            Log.d("trace", "onViewDetachedFromWindow CustomViewHolder: ");
+            CustomViewHolder viewHolder = (CustomViewHolder) holder;
             viewHolder.getAah_vi().getCustomVIdeoView().clearAll();
             viewHolder.getAah_vi().getCustomVIdeoView().invalidate();
         }
@@ -58,7 +50,7 @@ private int list_size;
 
 
     public void renderImageVideo(final CustomViewHolder vh, String url, Picasso p) {
-        Log.d("trace", "renderCardAtPosition: ");
+//        Log.d("trace", "renderCardAtPosition: ");
         if (url != null && !TextUtils.isEmpty(url)) {
             //todo change logic
             String newurl = "";
@@ -80,8 +72,10 @@ private int list_size;
 
     @Override
     public void onViewRecycled(CustomViewHolder holder) {
-        if (holder instanceof MyCustomViewHolder) {
-            MyCustomViewHolder viewHolder = (MyCustomViewHolder) holder;
+        if (holder instanceof CustomViewHolder) {
+            Log.d("trace", "onViewRecycled CustomViewHolder: ");
+
+            CustomViewHolder viewHolder = (CustomViewHolder) holder;
             viewHolder.getAah_vi().getCustomVIdeoView().clearAll();
             viewHolder.getAah_vi().getCustomVIdeoView().invalidate();
         }
@@ -91,6 +85,10 @@ private int list_size;
 
     public void setList_size(int list_size) {
         this.list_size = list_size;
+    }
+
+    public void setLayout(int layout) {
+        this.layout = layout;
     }
 
     @Override
@@ -103,8 +101,6 @@ private int list_size;
     public int getItemViewType(int position) {
         return 0;
     }
-
-
 
 
 }
