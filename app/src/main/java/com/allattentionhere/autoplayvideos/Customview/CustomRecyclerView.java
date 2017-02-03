@@ -1,5 +1,6 @@
 package com.allattentionhere.autoplayvideos.Customview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.allattentionhere.autoplayvideos.Adapter.VideosAdapter;
+import com.allattentionhere.autoplayvideos.Viewholder.CustomViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
 public class CustomRecyclerView extends RecyclerView {
 
     private List<String> urls = new ArrayList<>();
+    private Activity _act;
 
     public CustomRecyclerView(Context context) {
         super(context);
@@ -33,6 +36,10 @@ public class CustomRecyclerView extends RecyclerView {
     public CustomRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
+    }
+
+    public void set_act(Activity _act) {
+        this._act = _act;
     }
 
     @Override
@@ -57,12 +64,12 @@ public class CustomRecyclerView extends RecyclerView {
                         for (int i = firstCompletelyVisiblePosition; i <= lastCompletelyVisiblePosition; i++) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
-                                if (i >= 0 && holder instanceof VideosAdapter.CustomViewHolder && urls.get(i).endsWith(".mp4")) {
-                                    ((VideosAdapter.CustomViewHolder) holder).initVideoView(urls.get(i));
+                                if (i >= 0 && holder instanceof CustomViewHolder && urls.get(i).endsWith(".mp4")) {
+                                    ((CustomViewHolder) holder).initVideoView(urls.get(i),_act);
 //                                                                     ((NewHomeAdapter.ArticleViewHolder) holder).playVideo();
                                     Thread t = new Thread() {
                                         public void run() {
-                                            ((VideosAdapter.CustomViewHolder) holder).playVideo();
+                                            ((CustomViewHolder) holder).playVideo();
                                         }
                                     };
                                     t.start();
@@ -77,8 +84,8 @@ public class CustomRecyclerView extends RecyclerView {
                         for (int i = firstVisiblePosition; i < firstCompletelyVisiblePosition; i++) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
-                                if (i >= 0 && holder instanceof VideosAdapter.CustomViewHolder && urls.get(i).endsWith(".mp4")) {
-                                    ((VideosAdapter.CustomViewHolder) holder).pauseVideo();
+                                if (i >= 0 && holder instanceof CustomViewHolder && urls.get(i).endsWith(".mp4")) {
+                                    ((CustomViewHolder) holder).pauseVideo();
                                 }
                             }
                         }
@@ -88,8 +95,8 @@ public class CustomRecyclerView extends RecyclerView {
                         for (int i = lastVisiblePosition; i > lastCompletelyVisiblePosition; i--) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
-                                if (i >= 0 && holder instanceof VideosAdapter.CustomViewHolder && urls.get(i).endsWith(".mp4")) {
-                                    ((VideosAdapter.CustomViewHolder) holder).pauseVideo();
+                                if (i >= 0 && holder instanceof CustomViewHolder && urls.get(i).endsWith(".mp4")) {
+                                    ((CustomViewHolder) holder).pauseVideo();
                                 }
                             }
                         }

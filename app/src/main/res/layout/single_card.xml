@@ -18,11 +18,23 @@
     card_view:cardElevation="4dp"
     android:layout_gravity="center"
     card_view:cardPreventCornerOverlap="false">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.allattentionhere.autoplayvideos.Customview.AAH_VideoImage
+            android:id="@+id/aah_vi"
+            android:layout_width="220dp"
+            android:layout_height="220dp"/>
+        <TextView
+            android:gravity="center"
+            android:text="hello"
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
-<com.allattentionhere.autoplayvideos.Customview.AAH_VideoImage
-    android:id="@+id/aah_vi"
-    android:layout_width="220dp"
-    android:layout_height="220dp"/>
+
     <!--<FrameLayout-->
         <!--android:layout_gravity="center"-->
         <!--android:layout_width="220dp"-->
