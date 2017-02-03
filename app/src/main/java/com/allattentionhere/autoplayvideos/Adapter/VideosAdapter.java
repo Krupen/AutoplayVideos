@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.allattentionhere.autoplayvideos.Activity.MainActivity;
+import com.allattentionhere.autoplayvideos.Customview.AAH_VideoImage;
 import com.allattentionhere.autoplayvideos.Customview.CustomVideoView;
 import com.allattentionhere.autoplayvideos.R;
 
@@ -21,37 +22,34 @@ import butterknife.ButterKnife;
 
 
 
-
 public class VideosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<String> list_urls;
     Activity _activity;
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
-        private ImageView image;
-        private CustomVideoView cvv;
+       public AAH_VideoImage aah_vi;
 
         public CustomViewHolder(View x) {
             super(x);
-            image = ButterKnife.findById(x, R.id.image);
-            cvv = ButterKnife.findById(x, R.id.cvv);
+            aah_vi = ButterKnife.findById(x, R.id.aah_vi);
         }
 
         public void playVideo() {
-            this.cvv.startVideo();
+            this.aah_vi.getCustomVIdeoView().startVideo();
         }
 
         public void hideImagePlaceHolder() {
-            this.image.setVisibility(View.GONE);
+            this.aah_vi.getImageView().setVisibility(View.GONE);
         }
 
         public void initVideoView(String url) {
-            this.cvv.setVisibility(View.VISIBLE);
+            this.aah_vi.getCustomVIdeoView().setVisibility(View.VISIBLE);
             Uri uri = Uri.parse(url);
-            this.cvv.setSource(uri);
-            this.cvv.setLooping(true);
-            this.cvv.set_act(_activity);
-            this.cvv.setMyFuncIn(new Callable<Integer>() {
+            this.aah_vi.getCustomVIdeoView().setSource(uri);
+            this.aah_vi.getCustomVIdeoView().setLooping(true);
+            this.aah_vi.getCustomVIdeoView().set_act(_activity);
+            this.aah_vi.getCustomVIdeoView().setMyFuncIn(new Callable<Integer>() {
                 @Override
                 public Integer call() throws Exception {
                     hideImagePlaceHolder();
@@ -60,7 +58,7 @@ public class VideosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             });
         }
         public void pauseVideo() {
-            this.cvv.pauseVideo();
+            this.aah_vi.getCustomVIdeoView().pauseVideo();
         }
 
     }
@@ -90,8 +88,8 @@ public class VideosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onViewDetachedFromWindow(final RecyclerView.ViewHolder holder) {
         if (holder instanceof CustomViewHolder) {
             CustomViewHolder viewHolder = (CustomViewHolder) holder;
-            viewHolder.cvv.clearAll();
-            viewHolder.cvv.invalidate();
+            viewHolder.aah_vi.getCustomVIdeoView().clearAll();
+            viewHolder.aah_vi.getCustomVIdeoView().invalidate();
         }
         super.onViewDetachedFromWindow(holder);
     }
@@ -99,12 +97,13 @@ public class VideosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
     private void renderCardAtPosition(final CustomViewHolder vh, String url) {
+        Log.d("trace", "renderCardAtPosition: ");
         if (url != null && !TextUtils.isEmpty(url)) {
-            ((MainActivity) _activity).loadImageWithPicasso(url, vh.image);
-            vh.cvv.setVisibility(View.GONE);
-            vh.image.setVisibility(View.VISIBLE);
+            ((MainActivity) _activity).loadImageWithPicasso(url, vh.aah_vi.getImageView());
+            vh.aah_vi.getCustomVIdeoView().setVisibility(View.GONE);
+            vh.aah_vi.getImageView().setVisibility(View.VISIBLE);
         } else {
-            vh.image.setImageBitmap(null);
+            vh.aah_vi.getImageView().setImageBitmap(null);
         }
 
 
@@ -115,8 +114,8 @@ public class VideosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onViewRecycled(RecyclerView.ViewHolder holder) {
         if (holder instanceof CustomViewHolder) {
             CustomViewHolder viewHolder = (CustomViewHolder) holder;
-            viewHolder.cvv.clearAll();
-            viewHolder.cvv.invalidate();
+            viewHolder.aah_vi.getCustomVIdeoView().clearAll();
+            viewHolder.aah_vi.getCustomVIdeoView().invalidate();
         }
         super.onViewRecycled(holder);
 

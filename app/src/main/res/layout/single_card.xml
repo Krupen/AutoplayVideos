@@ -19,27 +19,30 @@
     android:layout_gravity="center"
     card_view:cardPreventCornerOverlap="false">
 
+<com.allattentionhere.autoplayvideos.Customview.AAH_VideoImage
+    android:id="@+id/aah_vi"
+    android:layout_width="220dp"
+    android:layout_height="220dp"/>
+    <!--<FrameLayout-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_width="220dp"-->
+        <!--android:layout_height="220dp">-->
 
-    <FrameLayout
-        android:layout_gravity="center"
-        android:layout_width="220dp"
-        android:layout_height="220dp">
+        <!--<com.allattentionhere.autoplayvideos.Customview.CustomVideoView-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:id="@+id/cvv"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
 
-        <com.allattentionhere.autoplayvideos.Customview.CustomVideoView
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:id="@+id/cvv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <!--<ImageView-->
+            <!--android:layout_gravity="center"-->
+            <!--android:id="@+id/image"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:scaleType="centerCrop" />-->
 
-        <ImageView
-            android:layout_gravity="center"
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-    </FrameLayout>
+    <!--</FrameLayout>-->
 
 </android.support.v7.widget.CardView>
 </LinearLayout>

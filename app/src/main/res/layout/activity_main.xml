@@ -8,7 +8,8 @@
     tools:ignore="MissingPrefix"
     android:gravity="center">
 
-    <android.support.v7.widget.RecyclerView
+
+    <com.allattentionhere.autoplayvideos.Customview.CustomRecyclerView
         android:layout_gravity="center"
         android:id="@+id/rv_home"
         android:layout_width="wrap_content"

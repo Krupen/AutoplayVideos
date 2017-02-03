@@ -90,7 +90,6 @@ public class CustomVideoView extends TextureView implements TextureView.SurfaceT
                     e.printStackTrace();
                 } catch (IllegalStateException e) {
                     e.printStackTrace();
-                    mMediaPlayer.reset();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -161,7 +160,6 @@ public class CustomVideoView extends TextureView implements TextureView.SurfaceT
                 e.printStackTrace();
             } catch (IllegalStateException e) {
                 e.printStackTrace();
-                mMediaPlayer.reset();
             } catch (IOException e) {
                 e.printStackTrace();
             }
