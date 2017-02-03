@@ -1,16 +1,13 @@
-package com.allattentionhere.autoplayvideos.Customview;
+package com.allattentionhere.autplayvideoslibrary;
 
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import com.allattentionhere.autoplayvideos.Adapter.VideosAdapter;
-import com.allattentionhere.autoplayvideos.Viewholder.CustomViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +35,7 @@ public class CustomRecyclerView extends RecyclerView {
 
     }
 
-    public void set_act(Activity _act) {
+    public void setActivity(Activity _act) {
         this._act = _act;
     }
 

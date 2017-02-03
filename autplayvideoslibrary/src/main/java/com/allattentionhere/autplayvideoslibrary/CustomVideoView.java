@@ -1,4 +1,4 @@
-package com.allattentionhere.autoplayvideos.Customview;
+package com.allattentionhere.autplayvideoslibrary;
 
 import android.app.Activity;
 import android.content.Context;

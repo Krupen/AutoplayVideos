@@ -1,17 +1,13 @@
-package com.allattentionhere.autoplayvideos.Viewholder;
+package com.allattentionhere.autplayvideoslibrary;
 
 import android.app.Activity;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
-import com.allattentionhere.autoplayvideos.Customview.AAH_VideoImage;
-import com.allattentionhere.autoplayvideos.R;
 
 import java.util.concurrent.Callable;
 
-import butterknife.ButterKnife;
 
 /**
  * Created by krupenghetiya on 03/02/17.
@@ -23,7 +19,8 @@ public class CustomViewHolder extends RecyclerView.ViewHolder {
 
     public CustomViewHolder(View x) {
         super(x);
-        aah_vi = ButterKnife.findById(x, R.id.aah_vi);
+
+        aah_vi = (AAH_VideoImage) x.findViewWithTag("aah_vi");
     }
 
     public void playVideo() {

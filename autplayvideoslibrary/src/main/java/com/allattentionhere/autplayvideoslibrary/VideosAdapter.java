@@ -1,4 +1,4 @@
-package com.allattentionhere.autoplayvideos.Adapter;
+package com.allattentionhere.autplayvideoslibrary;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.allattentionhere.autoplayvideos.R;
-import com.allattentionhere.autoplayvideos.Viewholder.CustomViewHolder;
 import com.squareup.picasso.Picasso;
 
 
@@ -83,7 +81,7 @@ public class VideosAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
     }
 
-    public void setList_size(int list_size) {
+    public void setListSize(int list_size) {
         this.list_size = list_size;
     }
 

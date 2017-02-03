@@ -7,7 +7,8 @@ import android.widget.TextView;
 
 import com.allattentionhere.autoplayvideos.Model.MyModel;
 import com.allattentionhere.autoplayvideos.R;
-import com.allattentionhere.autoplayvideos.Viewholder.CustomViewHolder;
+import com.allattentionhere.autplayvideoslibrary.CustomViewHolder;
+import com.allattentionhere.autplayvideoslibrary.VideosAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class MyVideosAdapter extends VideosAdapter {
         this.list = list_urls;
         this.picasso = p;
         //todo
-        setList_size(list.size());
+        setListSize(list.size());
     }
 
     @Override
@@ -50,6 +51,7 @@ public class MyVideosAdapter extends VideosAdapter {
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         ((MyCustomViewHolder) holder).tv.setText(list.get(position).getName());
+
         //todo
         holder.setUrl(list.get(position).getUrl());
         renderImageVideo(holder,list.get(position).getUrl(), picasso);

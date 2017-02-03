@@ -1,18 +1,12 @@
 package com.allattentionhere.autoplayvideos.Activity;
 
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.ImageView;
 
 import com.allattentionhere.autoplayvideos.Adapter.MyVideosAdapter;
-import com.allattentionhere.autoplayvideos.Adapter.VideosAdapter;
-import com.allattentionhere.autoplayvideos.Customview.CustomRecyclerView;
+import com.allattentionhere.autplayvideoslibrary.CustomRecyclerView;
 import com.allattentionhere.autoplayvideos.Model.MyModel;
 import com.allattentionhere.autoplayvideos.R;
 import com.squareup.picasso.Picasso;
@@ -64,15 +58,14 @@ public class MainActivity extends AppCompatActivity {
         urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/3_lfndfq.jpg","name20"));
         urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/1_ybonak.jpg","name21"));
 
-        List<String> urls_iv=new ArrayList<>();
-        for (int i = 0; i < urls.size(); i++) {
-            urls_iv.add(urls.get(i).getUrl());
-        }
 
         mAdapter = new MyVideosAdapter(urls, p);
         mLayoutManager = new LinearLayoutManager(this);
 
-        recyclerView.set_act(this);
+        //todo before setAdapter
+        recyclerView.setActivity(this);
+
+
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);

@@ -1,14 +1,10 @@
-package com.allattentionhere.autoplayvideos.Customview;
+package com.allattentionhere.autplayvideoslibrary;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ViewFlipper;
 
-import com.allattentionhere.autoplayvideos.R;
 
 /**
  * Created by krupenghetiya on 03/02/17.
@@ -48,6 +44,7 @@ public class AAH_VideoImage extends FrameLayout {
 
 
     private void init() {
+        this.setTag("aah_vi");
         cvv = new CustomVideoView(getContext());
         iv = new ImageView(getContext());
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
