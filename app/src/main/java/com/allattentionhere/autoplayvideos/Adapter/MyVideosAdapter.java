@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.allattentionhere.autoplayvideos.Model.MyModel;
 import com.allattentionhere.autoplayvideos.R;
-import com.allattentionhere.autplayvideoslibrary.CustomViewHolder;
-import com.allattentionhere.autplayvideoslibrary.VideosAdapter;
+import com.allattentionhere.autplayvideoslibrary.AAH_CustomViewHolder;
+import com.allattentionhere.autplayvideoslibrary.AAH_VideosAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -16,15 +16,15 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 
-public class MyVideosAdapter extends VideosAdapter {
+public class MyVideosAdapter extends AAH_VideosAdapter {
 
     private List<MyModel> list;
     Picasso picasso;
 
-    public class MyCustomViewHolder extends CustomViewHolder {
+    public class MyViewHolder extends AAH_CustomViewHolder {
 
         TextView tv;
-        public MyCustomViewHolder(View x) {
+        public MyViewHolder(View x) {
             super(x);
             tv= ButterKnife.findById(x,R.id.tv);
         }
@@ -39,18 +39,18 @@ public class MyVideosAdapter extends VideosAdapter {
     }
 
     @Override
-    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AAH_CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.single_card, parent, false);
         //todo
         setLayout(R.layout.single_card);
-        return new MyCustomViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, int position) {
-        ((MyCustomViewHolder) holder).tv.setText(list.get(position).getName());
+    public void onBindViewHolder(AAH_CustomViewHolder holder, int position) {
+        ((MyViewHolder) holder).tv.setText(list.get(position).getName());
 
         //todo
         holder.setUrl(list.get(position).getUrl());

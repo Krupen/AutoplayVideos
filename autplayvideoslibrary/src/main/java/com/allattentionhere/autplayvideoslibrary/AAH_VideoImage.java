@@ -11,7 +11,7 @@ import android.widget.ImageView;
  */
 
 public class AAH_VideoImage extends FrameLayout {
-    CustomVideoView cvv;
+    AAH_CustomVideoView cvv;
     ImageView iv;
 
     public AAH_VideoImage(Context context) {
@@ -34,7 +34,7 @@ public class AAH_VideoImage extends FrameLayout {
         init();
     }
 
-    public CustomVideoView getCustomVIdeoView() {
+    public AAH_CustomVideoView getCustomVIdeoView() {
         return cvv;
     }
 
@@ -45,7 +45,7 @@ public class AAH_VideoImage extends FrameLayout {
 
     private void init() {
         this.setTag("aah_vi");
-        cvv = new CustomVideoView(getContext());
+        cvv = new AAH_CustomVideoView(getContext());
         iv = new ImageView(getContext());
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
         this.addView(cvv);

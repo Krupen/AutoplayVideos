@@ -13,11 +13,11 @@ import java.util.concurrent.Callable;
  * Created by krupenghetiya on 03/02/17.
  */
 
-public class CustomViewHolder extends RecyclerView.ViewHolder {
+public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
     private AAH_VideoImage aah_vi;
     private String url;
 
-    public CustomViewHolder(View x) {
+    public AAH_CustomViewHolder(View x) {
         super(x);
 
         aah_vi = (AAH_VideoImage) x.findViewWithTag("aah_vi");

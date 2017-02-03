@@ -16,21 +16,21 @@ import java.util.List;
  * Created by krupenghetiya on 16/12/16.
  */
 
-public class CustomRecyclerView extends RecyclerView {
+public class AAH_CustomRecyclerView extends RecyclerView {
 
     private Activity _act;
 
-    public CustomRecyclerView(Context context) {
+    public AAH_CustomRecyclerView(Context context) {
         super(context);
     }
 
-    public CustomRecyclerView(Context context, @Nullable AttributeSet attrs) {
+    public AAH_CustomRecyclerView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
 
     }
 
-    public CustomRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public AAH_CustomRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
     }
@@ -61,14 +61,14 @@ public class CustomRecyclerView extends RecyclerView {
                         for (int i = firstCompletelyVisiblePosition; i <= lastCompletelyVisiblePosition; i++) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
-                                CustomViewHolder cvh = (CustomViewHolder)holder;
+                                AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
                                 if (i >= 0 && cvh!=null && cvh.getUrl().endsWith(".mp4")) {
                                     Log.d("k9works", "works: ");
-                                    ((CustomViewHolder) holder).initVideoView(cvh.getUrl(),_act);
+                                    ((AAH_CustomViewHolder) holder).initVideoView(cvh.getUrl(),_act);
 //                                                                     ((NewHomeAdapter.ArticleViewHolder) holder).playVideo();
                                     Thread t = new Thread() {
                                         public void run() {
-                                            ((CustomViewHolder) holder).playVideo();
+                                            ((AAH_CustomViewHolder) holder).playVideo();
                                         }
                                     };
                                     t.start();
@@ -83,10 +83,10 @@ public class CustomRecyclerView extends RecyclerView {
                         for (int i = firstVisiblePosition; i < firstCompletelyVisiblePosition; i++) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
-                                CustomViewHolder cvh = (CustomViewHolder)holder;
+                                AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
                                 if (i >= 0 && cvh!=null && cvh.getUrl().endsWith(".mp4")) {
                                     Log.d("k9works", "works: ");
-                                    ((CustomViewHolder) holder).pauseVideo();
+                                    ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
                             }
                         }
@@ -96,10 +96,10 @@ public class CustomRecyclerView extends RecyclerView {
                         for (int i = lastVisiblePosition; i > lastCompletelyVisiblePosition; i--) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
-                                CustomViewHolder cvh = (CustomViewHolder)holder;
+                                AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
                                 if (i >= 0 && cvh!=null && cvh.getUrl().endsWith(".mp4")) {
                                     Log.d("k9works", "works: ");
-                                    ((CustomViewHolder) holder).pauseVideo();
+                                    ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
                             }
                         }

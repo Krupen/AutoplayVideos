@@ -6,7 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.allattentionhere.autoplayvideos.Adapter.MyVideosAdapter;
-import com.allattentionhere.autplayvideoslibrary.CustomRecyclerView;
+import com.allattentionhere.autplayvideoslibrary.AAH_CustomRecyclerView;
 import com.allattentionhere.autoplayvideos.Model.MyModel;
 import com.allattentionhere.autoplayvideos.R;
 import com.squareup.picasso.Picasso;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     @InjectView(R.id.rv_home)
-    CustomRecyclerView recyclerView;
+    AAH_CustomRecyclerView recyclerView;
 
     private MyVideosAdapter mAdapter;
     LinearLayoutManager mLayoutManager;

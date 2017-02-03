@@ -1,8 +1,6 @@
 package com.allattentionhere.autplayvideoslibrary;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,33 +11,33 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 
 
-public class VideosAdapter extends RecyclerView.Adapter<CustomViewHolder> {
+public class AAH_VideosAdapter extends RecyclerView.Adapter<AAH_CustomViewHolder> {
 
 
     private int list_size;
     private int layout;
 
-    public VideosAdapter() {
+    public AAH_VideosAdapter() {
     }
 
     @Override
-    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AAH_CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(layout, parent, false);
-        return new CustomViewHolder(itemView);
+        return new AAH_CustomViewHolder(itemView);
     }
 
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, int position) {
+    public void onBindViewHolder(AAH_CustomViewHolder holder, int position) {
     }
 
 
     @Override
-    public void onViewDetachedFromWindow(final CustomViewHolder holder) {
-        if (holder instanceof CustomViewHolder) {
-            Log.d("trace", "onViewDetachedFromWindow CustomViewHolder: ");
-            CustomViewHolder viewHolder = (CustomViewHolder) holder;
+    public void onViewDetachedFromWindow(final AAH_CustomViewHolder holder) {
+        if (holder instanceof AAH_CustomViewHolder) {
+            Log.d("trace", "onViewDetachedFromWindow AAH_CustomViewHolder: ");
+            AAH_CustomViewHolder viewHolder = (AAH_CustomViewHolder) holder;
             viewHolder.getAah_vi().getCustomVIdeoView().clearAll();
             viewHolder.getAah_vi().getCustomVIdeoView().invalidate();
         }
@@ -47,7 +45,7 @@ public class VideosAdapter extends RecyclerView.Adapter<CustomViewHolder> {
     }
 
 
-    public void renderImageVideo(final CustomViewHolder vh, String url, Picasso p) {
+    public void renderImageVideo(final AAH_CustomViewHolder vh, String url, Picasso p) {
 //        Log.d("trace", "renderCardAtPosition: ");
         if (url != null && !TextUtils.isEmpty(url)) {
             //todo change logic
@@ -69,11 +67,11 @@ public class VideosAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
 
     @Override
-    public void onViewRecycled(CustomViewHolder holder) {
-        if (holder instanceof CustomViewHolder) {
-            Log.d("trace", "onViewRecycled CustomViewHolder: ");
+    public void onViewRecycled(AAH_CustomViewHolder holder) {
+        if (holder instanceof AAH_CustomViewHolder) {
+            Log.d("trace", "onViewRecycled AAH_CustomViewHolder: ");
 
-            CustomViewHolder viewHolder = (CustomViewHolder) holder;
+            AAH_CustomViewHolder viewHolder = (AAH_CustomViewHolder) holder;
             viewHolder.getAah_vi().getCustomVIdeoView().clearAll();
             viewHolder.getAah_vi().getCustomVIdeoView().invalidate();
         }

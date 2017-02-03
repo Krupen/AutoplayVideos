@@ -6,7 +6,6 @@ import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
 
@@ -14,7 +13,7 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 
 
-public class CustomVideoView extends TextureView implements TextureView.SurfaceTextureListener {
+public class AAH_CustomVideoView extends TextureView implements TextureView.SurfaceTextureListener {
     private MediaPlayer mMediaPlayer;
     private Uri mSource;
 //    private MediaPlayer.OnCompletionListener mCompletionListener;
@@ -22,15 +21,15 @@ public class CustomVideoView extends TextureView implements TextureView.SurfaceT
     Callable<Integer> myFuncIn = null;
     Activity _act;
 
-    public CustomVideoView(Context context) {
+    public AAH_CustomVideoView(Context context) {
         this(context, null, 0);
     }
 
-    public CustomVideoView(Context context, AttributeSet attrs) {
+    public AAH_CustomVideoView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CustomVideoView(Context context, AttributeSet attrs, int defStyle) {
+    public AAH_CustomVideoView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
