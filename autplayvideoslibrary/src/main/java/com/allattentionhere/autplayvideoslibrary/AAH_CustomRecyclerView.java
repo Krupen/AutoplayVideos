@@ -62,9 +62,9 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
                                 AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
-                                if (i >= 0 && cvh!=null && cvh.getUrl().endsWith(".mp4")) {
+                                if (i >= 0 && cvh!=null && cvh.getVideoUrl().endsWith(".mp4")) {
                                     Log.d("k9works", "works: ");
-                                    ((AAH_CustomViewHolder) holder).initVideoView(cvh.getUrl(),_act);
+                                    ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(),_act);
 //                                                                     ((NewHomeAdapter.ArticleViewHolder) holder).playVideo();
                                     Thread t = new Thread() {
                                         public void run() {
@@ -84,7 +84,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
                                 AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
-                                if (i >= 0 && cvh!=null && cvh.getUrl().endsWith(".mp4")) {
+                                if (i >= 0 && cvh!=null && cvh.getVideoUrl().endsWith(".mp4")) {
                                     Log.d("k9works", "works: ");
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
@@ -97,7 +97,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             if (holder != null) {
                                 AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
-                                if (i >= 0 && cvh!=null && cvh.getUrl().endsWith(".mp4")) {
+                                if (i >= 0 && cvh!=null && cvh.getVideoUrl().endsWith(".mp4")) {
                                     Log.d("k9works", "works: ");
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }

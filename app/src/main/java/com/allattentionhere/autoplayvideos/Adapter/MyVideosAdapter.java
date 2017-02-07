@@ -1,5 +1,6 @@
 package com.allattentionhere.autoplayvideos.Adapter;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,16 +35,12 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     public MyVideosAdapter(List<MyModel> list_urls, Picasso p) {
         this.list = list_urls;
         this.picasso = p;
-        //todo
-        setListSize(list.size());
     }
 
     @Override
     public AAH_CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.single_card, parent, false);
-        //todo
-        setLayout(R.layout.single_card);
         return new MyViewHolder(itemView);
     }
 
@@ -53,8 +50,11 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         ((MyViewHolder) holder).tv.setText(list.get(position).getName());
 
         //todo
-        holder.setUrl(list.get(position).getUrl());
-        renderImageVideo(holder,list.get(position).getUrl(), picasso);
+        holder.setImageUrl(list.get(position).getImage_url());
+        holder.setVideoUrl(list.get(position).getVideo_url());
+        //load image into imageview
+        picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
+
     }
 
 

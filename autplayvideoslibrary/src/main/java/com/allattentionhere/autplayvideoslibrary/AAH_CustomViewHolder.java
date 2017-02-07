@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 
 import java.util.concurrent.Callable;
@@ -15,7 +16,8 @@ import java.util.concurrent.Callable;
 
 public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
     private AAH_VideoImage aah_vi;
-    private String url;
+    private String imageUrl;
+    private String videoUrl;
 
     public AAH_CustomViewHolder(View x) {
         super(x);
@@ -24,7 +26,7 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void playVideo() {
-        this.aah_vi.getCustomVIdeoView().startVideo();
+        this.aah_vi.getCustomVideoView().startVideo();
     }
 
     public void hideImagePlaceHolder() {
@@ -32,12 +34,12 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void initVideoView(String url, Activity _act) {
-        this.aah_vi.getCustomVIdeoView().setVisibility(View.VISIBLE);
+        this.aah_vi.getCustomVideoView().setVisibility(View.VISIBLE);
         Uri uri = Uri.parse(url);
-        this.aah_vi.getCustomVIdeoView().setSource(uri);
-        this.aah_vi.getCustomVIdeoView().setLooping(true);
-        this.aah_vi.getCustomVIdeoView().set_act(_act);
-        this.aah_vi.getCustomVIdeoView().setMyFuncIn(new Callable<Integer>() {
+        this.aah_vi.getCustomVideoView().setSource(uri);
+        this.aah_vi.getCustomVideoView().setLooping(true);
+        this.aah_vi.getCustomVideoView().set_act(_act);
+        this.aah_vi.getCustomVideoView().setMyFuncIn(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
                 hideImagePlaceHolder();
@@ -46,18 +48,37 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
         });
     }
     public void pauseVideo() {
-        this.aah_vi.getCustomVIdeoView().pauseVideo();
+        this.aah_vi.getCustomVideoView().pauseVideo();
     }
 
     public AAH_VideoImage getAah_vi() {
         return aah_vi;
     }
 
-    public String getUrl() {
-        return url;
+    public ImageView getAAH_ImageView(){
+        return aah_vi.getImageView();
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public String getImageUrl() {
+        return imageUrl+"";
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        this.aah_vi.getImageView().setVisibility(View.VISIBLE);
+        this.aah_vi.getCustomVideoView().setVisibility(View.GONE);
+    }
+
+    public void setAah_vi(AAH_VideoImage aah_vi) {
+        this.aah_vi = aah_vi;
+    }
+
+    public String getVideoUrl() {
+
+        return videoUrl+"";
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 }

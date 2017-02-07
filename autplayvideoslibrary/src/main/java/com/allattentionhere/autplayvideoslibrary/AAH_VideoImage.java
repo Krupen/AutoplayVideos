@@ -34,7 +34,7 @@ public class AAH_VideoImage extends FrameLayout {
         init();
     }
 
-    public AAH_CustomVideoView getCustomVIdeoView() {
+    public AAH_CustomVideoView getCustomVideoView() {
         return cvv;
     }
 
