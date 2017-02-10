@@ -36,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         p = Picasso.with(this);
+//        urls.add(new MyModel("http://www.betcoingaming.com/webdesigns/animatedslider/images/liveroulette2.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name1"));
         urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795681/2_rp0zyy.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name1"));
         urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795676/4_nvnzry.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795676/4_nvnzry.jpg","name2"));
+//        urls.add(new MyModel("http://www.betcoingaming.com/webdesigns/animatedslider/images/liveroulette3.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name1"));
         urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/3_lfndfq.jpg","name3"));
         urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795675/3_yqeudi.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795675/3_yqeudi.jpg","name4"));
         urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795675/1_pyn1fm.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795675/1_pyn1fm.jpg","name5"));

@@ -25,9 +25,10 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     public class MyViewHolder extends AAH_CustomViewHolder {
 
         TextView tv;
+
         public MyViewHolder(View x) {
             super(x);
-            tv= ButterKnife.findById(x,R.id.tv);
+            tv = ButterKnife.findById(x, R.id.tv);
         }
 
     }
@@ -53,7 +54,8 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         holder.setImageUrl(list.get(position).getImage_url());
         holder.setVideoUrl(list.get(position).getVideo_url());
         //load image into imageview
-        picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
+        if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty())
+            picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
 
     }
 
@@ -68,7 +70,6 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     public int getItemViewType(int position) {
         return 0;
     }
-
 
 
 }
