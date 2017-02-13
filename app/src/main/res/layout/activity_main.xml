@@ -9,7 +9,7 @@
     android:gravity="center">
 
 
-    <com.allattentionhere.autplayvideoslibrary.AAH_CustomRecyclerView
+    <com.allattentionhere.autoplayvideos.AAH_CustomRecyclerView
         android:layout_gravity="center"
         android:id="@+id/rv_home"
         android:layout_width="wrap_content"

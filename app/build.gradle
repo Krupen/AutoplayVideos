@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId "com.allattentionhere.autoplayvideos"
+        applicationId "com.allattentionhere.autoplayvideossample"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
@@ -32,5 +32,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     testCompile 'junit:junit:4.12'
-    compile project(':autplayvideoslibrary')
+    compile project(':autoplayvideos')
 }
