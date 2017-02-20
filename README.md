@@ -36,7 +36,7 @@ dependencies {
 
 # Usage
 
-Add AAH_VideoImage to your xml file for single list item `single_card.xml`:
+Add `AAH_VideoImage` to your xml file for single list item `single_card.xml`:
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -77,7 +77,7 @@ Add AAH_VideoImage to your xml file for single list item `single_card.xml`:
 </LinearLayout>
 ```
 
-Add AAH_CustomRecyclerView to your Activity layout xml `MainActivity.xml`:
+Add `AAH_CustomRecyclerView` to your Activity layout xml `MainActivity.xml`:
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -156,7 +156,7 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
 }
 ```
 
-Finally setActivity in your Activity before setting the adapter and (Optional) scroll programmatically to initiate videos on initial screen:
+Finally `setActivity` in your Activity before setting the adapter and (Optional) scroll programmatically to initiate videos on initial screen:
 ```
  //todo before setAdapter
     recyclerView.setActivity(this);
@@ -167,7 +167,7 @@ Finally setActivity in your Activity before setting the adapter and (Optional) s
 ```
 # Use Cloudinary (Optional)
 
-It is recommended to use <a href="https://cloudinary.com">Cloudinary.com</a> to host your videos as it provides easy <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#generating_video_thumbnails">thumbnail-generation</a> and <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#resizing_and_cropping_videos">resizing/cropping videos</a> on-the-fly.
+It is recommended to use <a href="https://cloudinary.com" target="_blank">Cloudinary.com</a> to host your videos as it provides easy <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#generating_video_thumbnails" target="_blank">thumbnail-generation</a> and <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#resizing_and_cropping_videos" target="_blank">resizing/cropping videos</a> on-the-fly.
 
 # License
 
