@@ -24,7 +24,7 @@ buildscript {
 Add this dependency to your app-level `build.gradle` file:
 ```
 dependencies {
-    compile 'com.github.danylovolokh:video-player-manager:0.2.0'
+    compile 'com.allattentionhere:autoplayvideos:0.0.4'
 }
 ```
 
@@ -91,6 +91,7 @@ Add AAH_CustomRecyclerView to your Activity layout xml `MainActivity.xml`:
 ```
 
 Set Adapter with following specifics:
+
 1. Adapter should extend `AAH_VideosAdapter`.
 2. ViewHolder should extend `AAH_CustomViewHolder`.
 3. Set thumbnail image url and video url in `onBindViewHolder` method.
