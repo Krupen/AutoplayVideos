@@ -13,6 +13,10 @@ And it has following features:
 1. Auto-play videos when in view.
 2. Auto-pause videos when not in view or partially in view.
 
+
+# Demo
+![autoplayvideos_demo](https://raw.githubusercontent.com/Krupen/AutoplayVideos/master/AutoPlayVideos%20Demo.gif)
+
 # Gradle
 
 **Step 1.** Add the jCenter repository to your project-level build.gradle file
