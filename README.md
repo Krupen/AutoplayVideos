@@ -1,5 +1,6 @@
 # AutoplayVideos
 This library is created with the purpose to implement recyclerview with videos easily.
+This is the first version of the library and suggestions/contributions are most welcome to improvise the library.
 
 It is targeted at solving following problems:
 
@@ -12,21 +13,28 @@ And it has following features:
 1. Auto-play videos when in view.
 2. Auto-pause videos when not in view or partially in view.
 
-# Usage
-Add this snippet to your project-level `build.gradle` file:
-```
-buildscript {
-    repositories {
-        jcenter()
-    }
+# Gradle
+
+**Step 1.** Add the jCenter repository to your project-level build.gradle file
+
+``` groovy
+allprojects {
+	repositories {
+		jcenter()
+	}
 }
 ```
-Add this dependency to your app-level `build.gradle` file:
-```
+
+**Step 2.** Add the dependency to your app-level build.gradle file:
+
+``` groovy
 dependencies {
-    compile 'com.allattentionhere:autoplayvideos:0.0.4'
+	 compile 'com.allattentionhere:autoplayvideos:0.0.4'
 }
 ```
+
+
+# Usage
 
 Add AAH_VideoImage to your xml file for single list item `single_card.xml`:
 ```
@@ -150,13 +158,16 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
 
 Finally setActivity in your Activity before setting the adapter and (Optional) scroll programmatically to initiate videos on initial screen:
 ```
-  //todo before setAdapter
+ //todo before setAdapter
     recyclerView.setActivity(this);
     recyclerView.setAdapter(mAdapter);
-    //to init videos before scrolling
+ //to init videos before scrolling
     recyclerView.smoothScrollBy(0,1);
     recyclerView.smoothScrollBy(0,-1);
 ```
+# Use Cloudinary (Optional)
+
+It is recommended to use <a href="https://cloudinary.com">Cloudinary.com</a> to host your videos as it provides easy <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#generating_video_thumbnails">thumbnail-generation</a> and <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#resizing_and_cropping_videos">resizing/cropping videos</a> on-the-fly.
 
 # License
 
@@ -171,4 +182,5 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
 
