@@ -66,9 +66,11 @@ Add `AAH_VideoImage` to your xml file for single list item `single_card.xml`:
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+	
         <com.allattentionhere.autoplayvideos.AAH_VideoImage
             android:layout_width="220dp"
             android:layout_height="220dp"/>
+	    
         <TextView
             android:gravity="center"
             android:text="hello"
@@ -76,7 +78,6 @@ Add `AAH_VideoImage` to your xml file for single list item `single_card.xml`:
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
  </android.support.v7.widget.CardView>
 </LinearLayout>
 ```
@@ -97,8 +98,8 @@ Add `AAH_CustomRecyclerView` to your Activity layout xml `MainActivity.xml`:
         android:layout_gravity="center"
         android:id="@+id/rv_home"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent"/>
+
 </LinearLayout>
 ```
 
@@ -114,14 +115,11 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     Picasso picasso;
 
     public class MyViewHolder extends AAH_CustomViewHolder {
-
         TextView tv;
-
         public MyViewHolder(View x) {
             super(x);
             tv = ButterKnife.findById(x, R.id.tv);
         }
-
     }
 
     public MyVideosAdapter(List<MyModel> list_urls, Picasso p) {
