@@ -1,6 +1,5 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AutoPlay%20Videos-blue.svg)](https://android-arsenal.com/details/1/5372) [![API](https://img.shields.io/badge/API-16%2B-green.svg)](https://android-arsenal.com/api?level=16)
-
 # AutoplayVideos
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AutoPlay%20Videos-blue.svg)](https://android-arsenal.com/details/1/5372) [![API](https://img.shields.io/badge/API-16%2B-green.svg)](https://android-arsenal.com/api?level=16)
 This library is created with the purpose to implement recyclerview with videos easily.
 This is the first version of the library and suggestions/contributions are most welcome to improvise the library.
 
