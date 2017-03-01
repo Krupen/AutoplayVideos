@@ -175,7 +175,7 @@ Finally `setActivity` in your Activity before setting the adapter and (Optional)
 It is recommended to use <a href="https://cloudinary.com" target="_blank">Cloudinary.com</a> to host your videos as it provides easy <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#generating_video_thumbnails" target="_blank">thumbnail-generation</a> and <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#resizing_and_cropping_videos" target="_blank">resizing/cropping videos</a> on-the-fly.
 
 # License
-
+Copyright 2017 Krupen Ghetiya
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
