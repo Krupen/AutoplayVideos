@@ -5,7 +5,10 @@ import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
+import android.transition.Transition;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
 
@@ -16,7 +19,7 @@ import java.util.concurrent.Callable;
 public class AAH_CustomVideoView extends TextureView implements TextureView.SurfaceTextureListener {
     private MediaPlayer mMediaPlayer;
     private Uri mSource;
-//    private MediaPlayer.OnCompletionListener mCompletionListener;
+    //    private MediaPlayer.OnCompletionListener mCompletionListener;
     private boolean isLooping = false;
     Callable<Integer> myFuncIn = null;
     Activity _act;
@@ -114,10 +117,12 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
         super.onDetachedFromWindow();
     }
 
+
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
         if (mMediaPlayer != null) {
             mMediaPlayer.start();
+
         } else {
             Surface surface = new Surface(surfaceTexture);
             try {
@@ -172,7 +177,10 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 
     @Override
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-        surface.release();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //pre lollipop needs SurfaceTexture it owns before calling onDetachedFromWindow super
+            surface.release();
+        }
         return true;
     }
 
@@ -183,11 +191,15 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 
     public void clearAll() {
         if (getSurfaceTexture() != null)
-            getSurfaceTexture().release();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                //pre lollipop needs SurfaceTexture it owns before calling onDetachedFromWindow super
+                getSurfaceTexture().release();
+            }
         if (mMediaPlayer != null) {
             mMediaPlayer.stop();
             mMediaPlayer.reset();
-            mMediaPlayer.release();}
+            mMediaPlayer.release();
+        }
         setSurfaceTextureListener(null);
     }
 
@@ -197,4 +209,6 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
         }
 
     }
+
+
 }
