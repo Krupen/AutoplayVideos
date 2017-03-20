@@ -24,7 +24,7 @@ public class AAH_VideosAdapter extends RecyclerView.Adapter<AAH_CustomViewHolder
     @Override
     public void onViewDetachedFromWindow(final AAH_CustomViewHolder holder) {
         if (holder instanceof AAH_CustomViewHolder) {
-            Log.d("trace", "onViewDetachedFromWindow AAH_CustomViewHolder: ");
+//            Log.d("trace", "onViewDetachedFromWindow AAH_CustomViewHolder: ");
             AAH_CustomViewHolder viewHolder = (AAH_CustomViewHolder) holder;
             viewHolder.getAah_vi().getCustomVideoView().clearAll();
             viewHolder.getAah_vi().getCustomVideoView().invalidate();
@@ -55,7 +55,7 @@ public class AAH_VideosAdapter extends RecyclerView.Adapter<AAH_CustomViewHolder
     @Override
     public void onViewRecycled(AAH_CustomViewHolder holder) {
         if (holder instanceof AAH_CustomViewHolder) {
-            Log.d("trace", "onViewRecycled AAH_CustomViewHolder: ");
+//            Log.d("trace", "onViewRecycled AAH_CustomViewHolder: ");
             AAH_CustomViewHolder viewHolder = (AAH_CustomViewHolder) holder;
             viewHolder.getAah_vi().getCustomVideoView().clearAll();
             viewHolder.getAah_vi().getCustomVideoView().invalidate();

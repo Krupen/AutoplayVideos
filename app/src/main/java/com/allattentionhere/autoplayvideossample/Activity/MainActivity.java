@@ -37,39 +37,38 @@ public class MainActivity extends AppCompatActivity {
 
         p = Picasso.with(this);
 //        urls.add(new MyModel("http://www.betcoingaming.com/webdesigns/animatedslider/images/liveroulette2.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name1"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795681/2_rp0zyy.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name1"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795676/4_nvnzry.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795676/4_nvnzry.jpg","name2"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795681/2_rp0zyy.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","video1"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795676/4_nvnzry.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795676/4_nvnzry.jpg","video2"));
 //        urls.add(new MyModel("http://www.betcoingaming.com/webdesigns/animatedslider/images/liveroulette3.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name1"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/3_lfndfq.jpg","name3"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795675/3_yqeudi.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795675/3_yqeudi.jpg","name4"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795675/1_pyn1fm.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795675/1_pyn1fm.jpg","name5"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795676/4_nvnzry.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795676/4_nvnzry.jpg","name6"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/2_qwpgis.jpg","name7"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/1_ybonak.jpg","name8"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795681/2_rp0zyy.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name9"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/3_lfndfq.jpg","image3"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795675/3_yqeudi.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795675/3_yqeudi.jpg","video4"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795675/1_pyn1fm.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795675/1_pyn1fm.jpg","video5"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795676/4_nvnzry.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795676/4_nvnzry.jpg","video6"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/2_qwpgis.jpg","image7"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/1_ybonak.jpg","image8"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795681/2_rp0zyy.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","video9"));
         urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/3_lfndfq.jpg","name10"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795676/4_nvnzry.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795676/4_nvnzry.jpg","name11"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795681/2_rp0zyy.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name12"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/3_lfndfq.jpg","name13"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/2_qwpgis.jpg","name14"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/1_ybonak.jpg","name15"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795675/3_yqeudi.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795675/3_yqeudi.jpg","name16"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795675/1_pyn1fm.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795675/1_pyn1fm.jpg","name17"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795681/2_rp0zyy.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name18"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/2_qwpgis.jpg","name19"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/3_lfndfq.jpg","name20"));
-        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/1_ybonak.jpg","name21"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795676/4_nvnzry.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795676/4_nvnzry.jpg","video11"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795681/2_rp0zyy.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","video12"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/3_lfndfq.jpg","image13"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/2_qwpgis.jpg","image14"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/1_ybonak.jpg","image15"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795675/3_yqeudi.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795675/3_yqeudi.jpg","video16"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795675/1_pyn1fm.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795675/1_pyn1fm.jpg","video17"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795681/2_rp0zyy.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","video18"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/2_qwpgis.jpg","image19"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/3_lfndfq.jpg","image20"));
+        urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/1_ybonak.jpg","image21"));
 
 
         mAdapter = new MyVideosAdapter(urls, p);
         mLayoutManager = new LinearLayoutManager(this);
 
-        //todo before setAdapter
-        recyclerView.setActivity(this);
-
-
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        //todo before setAdapter
+        recyclerView.setActivity(this);
         recyclerView.setAdapter(mAdapter);
         //to init videos before scrolling
         recyclerView.smoothScrollBy(0,1);
