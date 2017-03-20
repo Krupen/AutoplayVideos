@@ -36,7 +36,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.0.4'
+	 compile 'com.allattentionhere:autoplayvideos:0.0.5'
 }
 ```
 
