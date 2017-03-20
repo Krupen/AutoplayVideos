@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/Krupen/AutoplayVideos'
     gitUrl = 'https://github.com/Krupen/AutoplayVideos.git'
 
-    libraryVersion = '0.0.4'
+    libraryVersion = '0.0.5'
 
     developerId = 'krupen'
     developerName = 'Krupen Ghetiya'
@@ -52,9 +52,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:recyclerview-v7:25.0.0'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
 
 }
 
