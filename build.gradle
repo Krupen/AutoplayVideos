@@ -19,6 +19,15 @@ allprojects {
     }
 }
 
+ext {
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.2'
+    minSdkVersion = 16
+    targetSdkVersion = 25
+
+    supportLibVersion = '25.1.1'
+    butterKnifeVersion = '6.1.0'
+}
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
