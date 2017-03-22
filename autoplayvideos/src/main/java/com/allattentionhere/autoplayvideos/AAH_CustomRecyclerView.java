@@ -45,7 +45,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
 
     }
 
-    public void addCustomOnScrollListener() {
+    private void addCustomOnScrollListener() {
         this.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(final RecyclerView recyclerView, final int newState) {
@@ -59,12 +59,10 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                     if (firstCompletelyVisiblePosition >= 0) {
                         for (int i = firstCompletelyVisiblePosition; i <= lastCompletelyVisiblePosition; i++) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
-                            if (holder != null) {
+                            try {
                                 AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
                                 if (i >= 0 && cvh!=null && cvh.getVideoUrl().endsWith(".mp4")) {
-//                                    Log.d("k9works", "works: ");
                                     ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(),_act);
-//                                                                     ((NewHomeAdapter.ArticleViewHolder) holder).playVideo();
                                     Thread t = new Thread() {
                                         public void run() {
                                             ((AAH_CustomViewHolder) holder).playVideo();
@@ -72,39 +70,46 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     };
                                     t.start();
                                     threads.add(t);
-//                                                                     ((NewHomeAdapter.ArticleViewHolder) holder).hideImagePlaceHolder();
                                 }
+                            }catch (Exception e){
+
                             }
+
                         }
                     }
 
                     if (firstCompletelyVisiblePosition >= 0 && firstCompletelyVisiblePosition != firstVisiblePosition) {
                         for (int i = firstVisiblePosition; i < firstCompletelyVisiblePosition; i++) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
-                            if (holder != null) {
+                            try {
                                 AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
                                 if (i >= 0 && cvh!=null && cvh.getVideoUrl().endsWith(".mp4")) {
-//                                    Log.d("k9works", "works: ");
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
+                            }catch (Exception e){
+
                             }
+
                         }
 
                     }
                     if (lastCompletelyVisiblePosition >= 0 && lastCompletelyVisiblePosition != lastVisiblePosition) {
                         for (int i = lastVisiblePosition; i > lastCompletelyVisiblePosition; i--) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
-                            if (holder != null) {
+                            try {
                                 AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
                                 if (i >= 0 && cvh!=null && cvh.getVideoUrl().endsWith(".mp4")) {
-//                                    Log.d("k9works", "works: ");
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
+                            }catch (Exception e){
+
                             }
+
                         }
                     }
                 } else if (threads.size() > 0) {
                     for (Thread t : threads) {
+                        t.interrupt();
                         t.stop();
                         t.destroy();
                     }

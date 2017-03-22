@@ -1,6 +1,8 @@
 package com.allattentionhere.autoplayvideos;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -11,8 +13,8 @@ import android.widget.ImageView;
  */
 
 public class AAH_VideoImage extends FrameLayout {
-    AAH_CustomVideoView cvv;
-    ImageView iv;
+    private AAH_CustomVideoView cvv;
+    private ImageView iv;
 
     public AAH_VideoImage(Context context) {
         super(context);
@@ -29,6 +31,7 @@ public class AAH_VideoImage extends FrameLayout {
         init();
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public AAH_VideoImage(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();

@@ -19,8 +19,8 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
     private Uri mSource;
     //    private MediaPlayer.OnCompletionListener mCompletionListener;
     private boolean isLooping = false;
-    Callable<Integer> myFuncIn = null;
-    Activity _act;
+    private Callable<Integer> myFuncIn = null;
+    private Activity _act;
 
     public AAH_CustomVideoView(Context context) {
         this(context, null, 0);
@@ -76,9 +76,9 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
                         }
                     });
 
-//            mMediaPlayer.setOnCompletionListener(mCompletionListener);
-//            mMediaPlayer.setOnBufferingUpdateListener(this);
-//            mMediaPlayer.setOnErrorListener(this);
+//                  mMediaPlayer.setOnCompletionListener(mCompletionListener);
+//                  mMediaPlayer.setOnBufferingUpdateListener(this);
+//                  mMediaPlayer.setOnErrorListener(this);
                     mMediaPlayer.setLooping(isLooping);
                     mMediaPlayer.setDataSource(getContext(), mSource);
                     mMediaPlayer.setSurface(surface);

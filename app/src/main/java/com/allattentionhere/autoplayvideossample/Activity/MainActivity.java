@@ -23,10 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.rv_home)
     AAH_CustomRecyclerView recyclerView;
 
-    private MyVideosAdapter mAdapter;
-    LinearLayoutManager mLayoutManager;
-    List<MyModel> urls = new ArrayList<>();
-    private static Picasso p ;
+    private final List<MyModel> urls = new ArrayList<>();
 
 
     @Override
@@ -35,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        p = Picasso.with(this);
+        Picasso p = Picasso.with(this);
 //        urls.add(new MyModel("http://www.betcoingaming.com/webdesigns/animatedslider/images/liveroulette2.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name1"));
         urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795681/2_rp0zyy.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","video1"));
         urls.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70/v1481795676/4_nvnzry.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_300,c_crop,q_70,so_0/v1481795676/4_nvnzry.jpg","video2"));
@@ -61,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/1_ybonak.jpg","image21"));
 
 
-        mAdapter = new MyVideosAdapter(urls, p);
-        mLayoutManager = new LinearLayoutManager(this);
+        MyVideosAdapter mAdapter = new MyVideosAdapter(urls, p);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
