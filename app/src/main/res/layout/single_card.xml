@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_gravity="center"
     android:layout_marginBottom="8dp"
-    android:layout_marginLeft="64dp"
-    android:layout_marginRight="64dp"
     android:layout_marginTop="8dp"
     android:gravity="center">
 
@@ -15,8 +12,6 @@
         android:id="@+id/card_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        card_view:cardCornerRadius="4dp"
         card_view:cardElevation="4dp"
         card_view:cardPreventCornerOverlap="false">
 
@@ -26,14 +21,16 @@
             android:orientation="vertical">
 
             <com.allattentionhere.autoplayvideos.AAH_VideoImage
-                android:layout_width="220dp"
-                android:layout_height="220dp" />
+                android:layout_width="300dp"
+                android:layout_height="150dp" />
 
             <TextView
                 android:id="@+id/tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:gravity="center"
+                android:textStyle="bold"
                 tools:text="hello" />
         </LinearLayout>
 
