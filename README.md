@@ -90,7 +90,6 @@ Add `AAH_CustomRecyclerView` to your Activity layout xml `MainActivity.xml`:
         android:layout_height="wrap_content" />
 	
 </LinearLayout>
-
 ```
 
 Set Adapter with following specifics:
