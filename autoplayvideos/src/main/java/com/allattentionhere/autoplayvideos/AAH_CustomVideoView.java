@@ -6,9 +6,7 @@ import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
-import android.transition.Transition;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
 
@@ -21,8 +19,8 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
     private Uri mSource;
     //    private MediaPlayer.OnCompletionListener mCompletionListener;
     private boolean isLooping = false;
-    Callable<Integer> myFuncIn = null;
-    Activity _act;
+    private Callable<Integer> myFuncIn = null;
+    private Activity _act;
 
     public AAH_CustomVideoView(Context context) {
         this(context, null, 0);
@@ -57,10 +55,10 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
                 Surface surface = new Surface(this.getSurfaceTexture());
                 try {
                     mMediaPlayer = new MediaPlayer();
-                    mMediaPlayer.setOnInfoListener(new MediaPlayer.OnInfoListener() {
-                        @Override
-                        public boolean onInfo(MediaPlayer mp, int what, int extra) {
-                            if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN) {
+                        mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mp) {
                                 _act.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -72,15 +70,34 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 
                                     }
                                 });
-
                             }
-                            return false;
-                        }
-                    });
+                        });
+                    } else {
+                        mMediaPlayer.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                            @Override
+                            public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                                if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                                    _act.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                myFuncIn.call();
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
 
-//            mMediaPlayer.setOnCompletionListener(mCompletionListener);
-//            mMediaPlayer.setOnBufferingUpdateListener(this);
-//            mMediaPlayer.setOnErrorListener(this);
+                                        }
+                                    });
+
+                                }
+                                return false;
+                            }
+                        });
+                    }
+
+//                  mMediaPlayer.setOnCompletionListener(mCompletionListener);
+//                  mMediaPlayer.setOnBufferingUpdateListener(this);
+//                  mMediaPlayer.setOnErrorListener(this);
                     mMediaPlayer.setLooping(isLooping);
                     mMediaPlayer.setDataSource(getContext(), mSource);
                     mMediaPlayer.setSurface(surface);
@@ -128,10 +145,10 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
             try {
                 mMediaPlayer = new MediaPlayer();
                 if (myFuncIn != null) {
-                    mMediaPlayer.setOnInfoListener(new MediaPlayer.OnInfoListener() {
-                        @Override
-                        public boolean onInfo(MediaPlayer mp, int what, int extra) {
-                            if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN) {
+                        mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mp) {
                                 _act.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -144,9 +161,29 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
                                     }
                                 });
                             }
-                            return false;
-                        }
-                    });
+                        });
+                    } else {
+                        mMediaPlayer.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                            @Override
+                            public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                                if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                                    _act.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                myFuncIn.call();
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+
+                                        }
+                                    });
+                                }
+                                return false;
+                            }
+                        });
+                    }
+
                 }
 
 //            mMediaPlayer.setOnCompletionListener(mCompletionListener);

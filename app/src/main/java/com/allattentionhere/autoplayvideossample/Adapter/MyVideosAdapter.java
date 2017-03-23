@@ -19,12 +19,12 @@ import butterknife.ButterKnife;
 
 public class MyVideosAdapter extends AAH_VideosAdapter {
 
-    private List<MyModel> list;
-    Picasso picasso;
+    private final List<MyModel> list;
+    private final Picasso picasso;
 
     public class MyViewHolder extends AAH_CustomViewHolder {
 
-        TextView tv;
+        final TextView tv;
 
         public MyViewHolder(View x) {
             super(x);
