@@ -3,7 +3,7 @@
 
 
 This library is created with the purpose to implement recyclerview with videos easily.
-This is the first version of the library and suggestions/contributions are most welcome to improvise the library.
+This is the first version of the library and suggestions/contributions to optimize memory and CPU usage are most welcome to improvise the library.
 
 It is targeted at solving following problems:
 
@@ -36,7 +36,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.0.5'
+	 compile 'com.allattentionhere:autoplayvideos:0.0.6'
 }
 ```
 
@@ -49,39 +49,30 @@ Add `AAH_VideoImage` to your xml file for single list item `single_card.xml`:
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:layout_marginBottom="8dp"
-    android:layout_marginLeft="64dp"
-    android:layout_marginRight="64dp"
-    android:layout_marginTop="8dp"
-    >
- <android.support.v7.widget.CardView
-    android:id="@+id/card_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="4dp"
-    android:layout_gravity="center"
-    card_view:cardPreventCornerOverlap="false">
-    <LinearLayout
-        android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-	
-        <com.allattentionhere.autoplayvideos.AAH_VideoImage
-            android:layout_width="220dp"
-            android:layout_height="220dp"/>
-	    
-        <TextView
-            android:gravity="center"
-            android:text="hello"
-            android:id="@+id/tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
- </android.support.v7.widget.CardView>
+       
+       <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.allattentionhere.autoplayvideos.AAH_VideoImage
+                android:layout_width="300dp"
+                android:layout_height="150dp" />
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+		
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>
 ```
 
@@ -89,21 +80,17 @@ Add `AAH_CustomRecyclerView` to your Activity layout xml `MainActivity.xml`:
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:ignore="MissingPrefix"
-    android:gravity="center">
+    android:orientation="vertical">
 
-<com.allattentionhere.autoplayvideos.AAH_CustomRecyclerView
-        android:layout_gravity="center"
+    <com.allattentionhere.autoplayvideos.AAH_CustomRecyclerView
         android:id="@+id/rv_home"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="wrap_content" />
+	
 </LinearLayout>
+
 ```
 
 Set Adapter with following specifics:
