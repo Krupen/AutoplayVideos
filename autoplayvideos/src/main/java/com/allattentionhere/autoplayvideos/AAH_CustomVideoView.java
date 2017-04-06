@@ -244,8 +244,13 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
         if (mMediaPlayer != null) {
             mMediaPlayer.pause();
         }
-
     }
 
+    public void muteVideo(){
+        mMediaPlayer.setVolume(0f, 0f);
+    }
 
+    public void unmuteVideo(){
+        mMediaPlayer.setVolume(1f, 1f);
+    }
 }
