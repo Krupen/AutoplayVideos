@@ -15,6 +15,7 @@ And it has following features:
 
 1. Auto-play videos when in view.
 2. Auto-pause videos when not in view or partially in view.
+3. Mute/Un-mute videos.
 
 
 # Demo
@@ -36,7 +37,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.0.6'
+	 compile 'com.allattentionhere:autoplayvideos:0.0.7'
 }
 ```
 
@@ -61,9 +62,22 @@ Add `AAH_VideoImage` to your xml file for single list item `single_card.xml`:
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.allattentionhere.autoplayvideos.AAH_VideoImage
+             <FrameLayout
                 android:layout_width="300dp"
-                android:layout_height="150dp" />
+                android:layout_height="150dp">
+
+                <com.allattentionhere.autoplayvideos.AAH_VideoImage
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/img_vol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/ic_unmute"/>
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv"
@@ -104,10 +118,16 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     Picasso picasso;
 
     public class MyViewHolder extends AAH_CustomViewHolder {
-        TextView tv;
+        final TextView tv;
+	final ImageView img_vol;
+	
+	//to mute/un-mute video (optional)
+        boolean isMuted;
+	
         public MyViewHolder(View x) {
             super(x);
             tv = ButterKnife.findById(x, R.id.tv);
+	    img_vol = ButterKnife.findById(x, R.id.img_vol);
         }
     }
 
@@ -133,6 +153,27 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         //load image/thumbnail into imageview
         if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty())
             picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
+	    
+	//to mute/un-mute video (optional)
+        holder.getAah_vi().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((MyViewHolder) holder).isMuted) {
+                    holder.unmuteVideo();
+                    ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_unmute);
+                } else {
+                    holder.muteVideo();
+                    ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_mute);
+                }
+                ((MyViewHolder) holder).isMuted = !((MyViewHolder) holder).isMuted;
+            }
+        });
+
+        if (list.get(position).getVideo_url()==null){
+            ((MyViewHolder) holder).img_vol.setVisibility(View.GONE);
+        }else {
+            ((MyViewHolder) holder).img_vol.setVisibility(View.VISIBLE);
+        }
     }
     
     @Override
