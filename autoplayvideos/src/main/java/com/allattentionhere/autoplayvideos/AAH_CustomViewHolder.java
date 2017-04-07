@@ -51,6 +51,14 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
         this.aah_vi.getCustomVideoView().pauseVideo();
     }
 
+    public void muteVideo(){
+        this.aah_vi.getCustomVideoView().muteVideo();
+    }
+
+    public void unmuteVideo(){
+        this.aah_vi.getCustomVideoView().unmuteVideo();
+    }
+
     public AAH_VideoImage getAah_vi() {
         return aah_vi;
     }
