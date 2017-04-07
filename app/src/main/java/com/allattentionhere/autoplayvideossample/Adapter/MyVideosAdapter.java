@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.allattentionhere.autoplayvideossample.Model.MyModel;
@@ -25,10 +26,15 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     public class MyViewHolder extends AAH_CustomViewHolder {
 
         final TextView tv;
+        final ImageView img_vol;
+
+        //to mute/un-mute video (optional)
+        boolean isMuted;
 
         public MyViewHolder(View x) {
             super(x);
             tv = ButterKnife.findById(x, R.id.tv);
+            img_vol = ButterKnife.findById(x, R.id.img_vol);
         }
 
     }
@@ -47,15 +53,37 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
 
 
     @Override
-    public void onBindViewHolder(AAH_CustomViewHolder holder, int position) {
+    public void onBindViewHolder(final AAH_CustomViewHolder holder, int position) {
         ((MyViewHolder) holder).tv.setText(list.get(position).getName());
 
         //todo
         holder.setImageUrl(list.get(position).getImage_url());
         holder.setVideoUrl(list.get(position).getVideo_url());
         //load image into imageview
-        if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty())
+        if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty()) {
             picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
+        }
+
+        //to mute/un-mute video (optional)
+        holder.getAah_vi().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((MyViewHolder) holder).isMuted) {
+                    holder.unmuteVideo();
+                    ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_unmute);
+                } else {
+                    holder.muteVideo();
+                    ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_mute);
+                }
+                ((MyViewHolder) holder).isMuted = !((MyViewHolder) holder).isMuted;
+            }
+        });
+
+        if (list.get(position).getVideo_url()==null){
+            ((MyViewHolder) holder).img_vol.setVisibility(View.GONE);
+        }else {
+            ((MyViewHolder) holder).img_vol.setVisibility(View.VISIBLE);
+        }
 
     }
 

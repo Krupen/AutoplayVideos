@@ -20,9 +20,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.allattentionhere.autoplayvideos.AAH_VideoImage
+            <FrameLayout
                 android:layout_width="300dp"
-                android:layout_height="150dp" />
+                android:layout_height="150dp">
+
+                <com.allattentionhere.autoplayvideos.AAH_VideoImage
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/img_vol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/ic_unmute"
+                    android:visibility="gone" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv"
