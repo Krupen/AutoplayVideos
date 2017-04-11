@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
         //todo before setAdapter
         recyclerView.setActivity(this);
+        //optional
+        recyclerView.setPlayOnlyFirstVideo(true); // false by default
+
         recyclerView.setAdapter(mAdapter);
         //to init videos before scrolling
         recyclerView.smoothScrollBy(0,1);

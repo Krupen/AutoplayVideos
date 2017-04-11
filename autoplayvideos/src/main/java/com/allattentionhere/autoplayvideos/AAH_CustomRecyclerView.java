@@ -18,6 +18,7 @@ import java.util.List;
 public class AAH_CustomRecyclerView extends RecyclerView {
 
     private Activity _act;
+    private boolean playOnlyFirstVideo = false;
 
     public AAH_CustomRecyclerView(Context context) {
         super(context);
@@ -57,24 +58,50 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                     int firstVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
                     int lastVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
                     if (firstCompletelyVisiblePosition >= 0) {
-                        for (int i = firstCompletelyVisiblePosition; i <= lastCompletelyVisiblePosition; i++) {
-                            final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
-                            try {
-                                AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
-                                if (i >= 0 && cvh!=null && cvh.getVideoUrl().endsWith(".mp4")) {
-                                    ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(),_act);
-                                    Thread t = new Thread() {
-                                        public void run() {
-                                            ((AAH_CustomViewHolder) holder).playVideo();
+                        if (playOnlyFirstVideo) {
+                            for (int i = firstCompletelyVisiblePosition; i <= lastCompletelyVisiblePosition; i++) {
+                                final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
+                                try {
+                                    AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
+                                    if (i >= 0 && cvh != null && cvh.getVideoUrl().endsWith(".mp4")) {
+                                        if (i == firstCompletelyVisiblePosition) {
+                                            ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(), _act);
+                                            Thread t = new Thread() {
+                                                public void run() {
+                                                    ((AAH_CustomViewHolder) holder).playVideo();
+                                                }
+                                            };
+                                            t.start();
+                                            threads.add(t);
+                                        } else {
+                                            ((AAH_CustomViewHolder) holder).pauseVideo();
                                         }
-                                    };
-                                    t.start();
-                                    threads.add(t);
+                                    }
+                                } catch (Exception e) {
+
                                 }
-                            }catch (Exception e){
 
                             }
+                        } else {
+                            for (int i = firstCompletelyVisiblePosition; i <= lastCompletelyVisiblePosition; i++) {
+                                final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
+                                try {
+                                    AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
+                                    if (i >= 0 && cvh != null && cvh.getVideoUrl().endsWith(".mp4")) {
+                                        ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(), _act);
+                                        Thread t = new Thread() {
+                                            public void run() {
+                                                ((AAH_CustomViewHolder) holder).playVideo();
+                                            }
+                                        };
+                                        t.start();
+                                        threads.add(t);
+                                    }
+                                } catch (Exception e) {
 
+                                }
+
+                            }
                         }
                     }
 
@@ -82,11 +109,11 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                         for (int i = firstVisiblePosition; i < firstCompletelyVisiblePosition; i++) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             try {
-                                AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
-                                if (i >= 0 && cvh!=null && cvh.getVideoUrl().endsWith(".mp4")) {
+                                AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
+                                if (i >= 0 && cvh != null && cvh.getVideoUrl().endsWith(".mp4")) {
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
-                            }catch (Exception e){
+                            } catch (Exception e) {
 
                             }
 
@@ -97,11 +124,11 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                         for (int i = lastVisiblePosition; i > lastCompletelyVisiblePosition; i--) {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             try {
-                                AAH_CustomViewHolder cvh = (AAH_CustomViewHolder)holder;
-                                if (i >= 0 && cvh!=null && cvh.getVideoUrl().endsWith(".mp4")) {
+                                AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
+                                if (i >= 0 && cvh != null && cvh.getVideoUrl().endsWith(".mp4")) {
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
-                            }catch (Exception e){
+                            } catch (Exception e) {
 
                             }
 
@@ -124,5 +151,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
         });
     }
 
-
+    public void setPlayOnlyFirstVideo(boolean playOnlyFirstVideo) {
+        this.playOnlyFirstVideo = playOnlyFirstVideo;
+    }
 }
