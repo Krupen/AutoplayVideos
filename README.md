@@ -16,6 +16,7 @@ And it has following features:
 1. Auto-play videos when in view.
 2. Auto-pause videos when not in view or partially in view.
 3. Mute/Un-mute videos.
+4. Option to play only first visible video.
 
 
 # Demo
@@ -37,7 +38,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.0.7'
+	 compile 'com.allattentionhere:autoplayvideos:0.0.8'
 }
 ```
 
@@ -192,6 +193,9 @@ Finally `setActivity` in your Activity before setting the adapter and (Optional)
 ```
  //todo before setAdapter
     recyclerView.setActivity(this);
+ //optional
+    recyclerView.setPlayOnlyFirstVideo(true); // false by default
+
     recyclerView.setAdapter(mAdapter);
  //to init videos before scrolling
     recyclerView.smoothScrollBy(0,1);
