@@ -4,7 +4,7 @@ android:
     # Uncomment the lines below if you want to
     # use the latest revision of Android SDK Tools
     - platform-tools
-    # - tools
+    - tools
 
     # The BuildTools version used by your project
     - build-tools-25.0.2
@@ -13,10 +13,10 @@ android:
     - android-25
 
     # Additional components
+    - extra-android-support
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-19
-
-    # system image,
-    - sys-img-armeabi-v7a-android-22
+    
+script: 'travis_retry ./gradlew build'
