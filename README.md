@@ -1,10 +1,11 @@
 # AutoplayVideos
 ### Show some :heart: and star the repo to support the project
-[![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Star)](https://github.com/Krupen/AutoplayVideos) [![GitHub forks](https://img.shields.io/github/forks/badges/shields.svg?style=social&label=Fork)](https://github.com/Krupen/AutoplayVideos/fork) [![GitHub watchers](https://img.shields.io/github/watchers/badges/shields.svg?style=social&label=Watch)](https://github.com/Krupen/AutoplayVideos) [![GitHub followers](https://img.shields.io/github/followers/espadrine.svg?style=social&label=Follow)](https://github.com/Krupen/AutoplayVideos)  
-[![Twitter Follow](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Follow)](https://twitter.com/krupenghetiya)
-
 
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg)](https://android-arsenal.com/api?level=16) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AutoPlay%20Videos-2CB3E5.svg)](https://android-arsenal.com/details/1/5372) [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23249-2CB3E5.svg)](http://androidweekly.net/issues/issue-249) [![AndroidDev Digest](https://img.shields.io/badge/AndroidDev%20Digest-%23136-2CB3E5.svg)](https://www.androiddevdigest.com/digest136/) 
+
+
+[![GitHub stars](https://img.shields.io/github/stars/Krupen/AutoplayVideos.svg?style=social)](https://github.com/Krupen/AutoplayVideos/stargazers) [![GitHub forks](https://img.shields.io/github/forks/Krupen/AutoplayVideos.svg?style=social)](https://github.com/Krupen/AutoplayVideos/network) [![GitHub watchers](https://img.shields.io/github/watchers/Krupen/AutoplayVideos.svg?style=social)](https://github.com/Krupen/AutoplayVideos/watchers) [![GitHub followers](https://img.shields.io/github/followers/Krupen.svg?style=social)](https://github.com/Krupen/followers)  
+[![Twitter Follow](https://img.shields.io/twitter/follow/KrupenGhetiya.svg?style=social&label=Follow)](https://twitter.com/krupenghetiya)
 
 
 This library is created with the purpose to implement recyclerview with videos easily.
@@ -29,6 +30,7 @@ And it has following features:
 
 # Download
 **Gradle**
+
 **Step 1.** Add the jCenter repository to your project-level build.gradle file
 
 ``` groovy
