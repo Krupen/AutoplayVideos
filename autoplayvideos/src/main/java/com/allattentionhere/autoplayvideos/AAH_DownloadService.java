@@ -2,7 +2,6 @@ package com.allattentionhere.autoplayvideos;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -13,6 +12,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by krupenghetiya on 03/05/17.
@@ -61,7 +62,8 @@ public class AAH_DownloadService extends IntentService {
                 f.write(buffer, 0, len1);
             }
             f.close();
-            AAH_SharedPrefsUtil.saveString(getApplicationContext(), requestUrl, rootFile.getAbsolutePath());
+            Log.d("k9download", "downloadData: "+rootFile.getAbsolutePath());
+            AAH_Utils.saveString(getApplicationContext(), requestUrl, rootFile.getAbsolutePath());
             return true;
         } catch (IOException e) {
             return false;

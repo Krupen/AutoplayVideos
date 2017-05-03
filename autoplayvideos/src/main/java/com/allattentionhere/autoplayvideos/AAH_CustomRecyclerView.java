@@ -1,10 +1,8 @@
 package com.allattentionhere.autoplayvideos;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,14 +11,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.allattentionhere.autoplayvideos.AAH_Utils.getString;
 
 /**
  * Created by krupenghetiya on 16/12/16.
@@ -79,9 +73,9 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
                                     if (i >= 0 && cvh != null && cvh.getVideoUrl().endsWith(".mp4")) {
                                         if (!foundFirstVideo) {
-                                            foundFirstVideo=true;
-                                            if (AAH_SharedPrefsUtil.getString(_act, cvh.getVideoUrl()) != null) {
-                                                ((AAH_CustomViewHolder) holder).initVideoView(AAH_SharedPrefsUtil.getString(_act, cvh.getVideoUrl()), _act);
+                                            foundFirstVideo = true;
+                                            if (getString(_act, cvh.getVideoUrl()) != null) {
+                                                ((AAH_CustomViewHolder) holder).initVideoView(getString(_act, cvh.getVideoUrl()), _act);
                                             } else {
                                                 ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(), _act);
                                             }
@@ -111,8 +105,8 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                 try {
                                     AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
                                     if (i >= 0 && cvh != null && cvh.getVideoUrl().endsWith(".mp4")) {
-                                        if (AAH_SharedPrefsUtil.getString(_act, cvh.getVideoUrl()) != null) {
-                                            ((AAH_CustomViewHolder) holder).initVideoView(AAH_SharedPrefsUtil.getString(_act, cvh.getVideoUrl()), _act);
+                                        if (getString(_act, cvh.getVideoUrl()) != null) {
+                                            ((AAH_CustomViewHolder) holder).initVideoView(getString(_act, cvh.getVideoUrl()), _act);
                                         } else {
                                             ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(), _act);
                                         }
@@ -187,7 +181,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
 
     public void startDownloadInBackground(String url) {
         /* Starting Download Service */
-        if (AAH_SharedPrefsUtil.getString(_act, url) == null) {
+        if (AAH_Utils.getString(_act, url) == null) {
             Log.d("k9download ", "startDownloadInBackground: url:" + url);
             Intent intent = new Intent(Intent.ACTION_SYNC, null, _act, AAH_DownloadService.class);
         /* Send optional extras to Download IntentService */
@@ -204,5 +198,18 @@ public class AAH_CustomRecyclerView extends RecyclerView {
 
     public void setDownloadPath(String downloadPath) {
         this.downloadPath = downloadPath;
+    }
+
+    public void preDownload(List<String> urls) {
+        Log.d("k9download", "urls.size: " + urls.size());
+        for (int i = 0; i < urls.size(); i++) {
+            if (AAH_Utils.getString(_act, urls.get(i)) == null) {
+                Intent intent = new Intent(Intent.ACTION_SYNC, null, _act, AAH_DownloadService.class);
+                intent.putExtra("url", urls.get(i));
+                intent.putExtra("path", downloadPath);
+                intent.putExtra("requestId", 101);
+                _act.startService(intent);
+            }
+        }
     }
 }
