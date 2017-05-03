@@ -31,9 +31,7 @@ public class AAH_DownloadService extends IntentService {
         String path = intent.getStringExtra("path");
 
         if (!TextUtils.isEmpty(url)) {
-            /* Update UI: Download Service is Running */
             downloadData(url,path);
-
         }
         this.stopSelf();
     }
@@ -62,7 +60,6 @@ public class AAH_DownloadService extends IntentService {
                 f.write(buffer, 0, len1);
             }
             f.close();
-            Log.d("k9download", "downloadData: "+rootFile.getAbsolutePath());
             AAH_Utils.saveString(getApplicationContext(), requestUrl, rootFile.getAbsolutePath());
             return true;
         } catch (IOException e) {

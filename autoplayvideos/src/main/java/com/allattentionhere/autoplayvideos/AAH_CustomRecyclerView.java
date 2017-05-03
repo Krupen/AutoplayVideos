@@ -82,7 +82,6 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                             if (downloadVideos) {
                                                 startDownloadInBackground(cvh.getVideoUrl());
                                             }
-
                                             Thread t = new Thread() {
                                                 public void run() {
                                                     ((AAH_CustomViewHolder) holder).playVideo();
@@ -140,9 +139,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                             } catch (Exception e) {
 
                             }
-
                         }
-
                     }
                     if (lastCompletelyVisiblePosition >= 0 && lastCompletelyVisiblePosition != lastVisiblePosition) {
                         for (int i = lastVisiblePosition; i > lastCompletelyVisiblePosition; i--) {
@@ -153,9 +150,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
                             } catch (Exception e) {
-
                             }
-
                         }
                     }
                 } else if (threads.size() > 0) {
@@ -167,7 +162,6 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                     threads.clear();
                 }
             }
-
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -182,7 +176,6 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     public void startDownloadInBackground(String url) {
         /* Starting Download Service */
         if (AAH_Utils.getString(_act, url) == null) {
-            Log.d("k9download ", "startDownloadInBackground: url:" + url);
             Intent intent = new Intent(Intent.ACTION_SYNC, null, _act, AAH_DownloadService.class);
         /* Send optional extras to Download IntentService */
             intent.putExtra("url", url);
@@ -201,7 +194,6 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void preDownload(List<String> urls) {
-        Log.d("k9download", "urls.size: " + urls.size());
         for (int i = 0; i < urls.size(); i++) {
             if (AAH_Utils.getString(_act, urls.get(i)) == null) {
                 Intent intent = new Intent(Intent.ACTION_SYNC, null, _act, AAH_DownloadService.class);
