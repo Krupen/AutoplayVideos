@@ -239,6 +239,7 @@ List<String> urls = new ArrayList<>();
  }
 recyclerView.preDownload(urls);
 ```
+Note: Do not forget to add WRITE_EXTERNAL_STORAGE permission in the Manifest file and also ask for runtime permission in devices above Marshmallow.
 
 # Use Cloudinary (Optional)
 
