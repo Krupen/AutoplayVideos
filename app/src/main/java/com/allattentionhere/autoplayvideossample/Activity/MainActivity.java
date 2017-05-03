@@ -1,5 +1,6 @@
 package com.allattentionhere.autoplayvideossample.Activity;
 
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/3_lfndfq.jpg","image20"));
         urls.add(new MyModel("http://res.cloudinary.com/krupen/image/upload/q_70/v1481795690/1_ybonak.jpg","image21"));
 
+        //you can pass local file uri, but make sure it exists
+//        urls.add(new MyModel("/storage/emulated/0/VideoPlay/myvideo.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_150,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","video18"));
 
         MyVideosAdapter mAdapter = new MyVideosAdapter(urls, p);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -65,8 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
         //todo before setAdapter
         recyclerView.setActivity(this);
+
         //optional
         recyclerView.setPlayOnlyFirstVideo(true); // false by default
+        recyclerView.setDownloadVideos(true); // false by default
+        recyclerView.setDownloadPath(Environment.getExternalStorageDirectory() + "/VideoPlay"); // (Environment.getExternalStorageDirectory() + "/Video") by default
 
         recyclerView.setAdapter(mAdapter);
         //to init videos before scrolling

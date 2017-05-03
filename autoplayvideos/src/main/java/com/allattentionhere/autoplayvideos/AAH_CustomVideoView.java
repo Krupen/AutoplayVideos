@@ -7,11 +7,14 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
+
+import static android.content.ContentValues.TAG;
 
 
 public class AAH_CustomVideoView extends TextureView implements TextureView.SurfaceTextureListener {
@@ -100,6 +103,7 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 //                  mMediaPlayer.setOnErrorListener(this);
                     mMediaPlayer.setLooping(isLooping);
                     mMediaPlayer.setDataSource(getContext(), mSource);
+                    Log.d("k9download", "mSource: " + mSource);
                     mMediaPlayer.setSurface(surface);
                     mMediaPlayer.prepare();
                     if (mMediaPlayer != null) mMediaPlayer.start();
@@ -191,6 +195,7 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 //            mMediaPlayer.setOnErrorListener(this);
                 mMediaPlayer.setLooping(isLooping);
                 mMediaPlayer.setDataSource(getContext(), mSource);
+                Log.d("k9download", "mSource: " + mSource);
                 mMediaPlayer.setSurface(surface);
                 mMediaPlayer.prepare();
                 mMediaPlayer.start();
@@ -246,11 +251,13 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
         }
     }
 
-    public void muteVideo(){
+    public void muteVideo() {
+        if (mMediaPlayer!=null)
         mMediaPlayer.setVolume(0f, 0f);
     }
 
-    public void unmuteVideo(){
-        mMediaPlayer.setVolume(1f, 1f);
+    public void unmuteVideo() {
+        if (mMediaPlayer!=null)
+            mMediaPlayer.setVolume(1f, 1f);
     }
 }

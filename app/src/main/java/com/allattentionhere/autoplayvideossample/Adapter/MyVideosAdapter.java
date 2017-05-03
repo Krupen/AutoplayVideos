@@ -79,9 +79,9 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
             }
         });
 
-        if (list.get(position).getVideo_url()==null){
+        if (list.get(position).getVideo_url() == null) {
             ((MyViewHolder) holder).img_vol.setVisibility(View.GONE);
-        }else {
+        } else {
             ((MyViewHolder) holder).img_vol.setVisibility(View.VISIBLE);
         }
 
