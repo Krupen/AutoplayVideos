@@ -21,6 +21,7 @@ And it has following features:
 2. Auto-pause videos when not in view or partially in view.
 3. Mute/Un-mute videos.
 4. Option to play only first visible video.
+5. Download videos to local storage in background for faster loading.
 
 
 # Demo
@@ -216,14 +217,16 @@ Finally `setActivity` in your Activity before setting the adapter and (Optional)
 ```
 
 
-**Play only 1st video (Optional)**
+###Play only 1st video (Optional)
+
 Setting this parameter will play video only in 1st completely visible RecyclerView ViewHolder.
 ```
 recyclerView.setPlayOnlyFirstVideo(true); // false by default
 ```
 
 
-**Download videos to local storage (Optional)**
+###Download videos to local storage (Optional)
+
 You can start downloading video in background on viewholder loaded. You can change download path.
 ```
 recyclerView.setDownloadPath(Environment.getExternalStorageDirectory() + "/MyVideo"); //optional
