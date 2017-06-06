@@ -21,6 +21,7 @@ And it has following features:
 2. Auto-pause videos when not in view or partially in view.
 3. Mute/Un-mute videos.
 4. Option to play only first visible video.
+5. Download videos to local storage in background for faster loading.
 
 
 # Demo
@@ -43,7 +44,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.0.8'
+	 compile 'com.allattentionhere:autoplayvideos:0.0.9'
 }
 ```
 
@@ -53,7 +54,7 @@ dependencies {
 <dependency>
   <groupId>com.allattentionhere</groupId>
   <artifactId>autoplayvideos</artifactId>
-  <version>0.0.8</version>
+  <version>0.0.9</version>
   <type>pom</type>
 </dependency>
 ```
@@ -208,14 +209,38 @@ Finally `setActivity` in your Activity before setting the adapter and (Optional)
 ```
  //todo before setAdapter
     recyclerView.setActivity(this);
- //optional
-    recyclerView.setPlayOnlyFirstVideo(true); // false by default
-
+    
     recyclerView.setAdapter(mAdapter);
  //to init videos before scrolling
     recyclerView.smoothScrollBy(0,1);
     recyclerView.smoothScrollBy(0,-1);
 ```
+
+
+### Play only 1st video (Optional)
+Setting this parameter will play video only in 1st completely visible RecyclerView ViewHolder.
+```
+recyclerView.setPlayOnlyFirstVideo(true); // false by default
+```
+
+
+### Download videos to local storage (Optional)
+You can start downloading video in background on viewholder loaded. You can change download path.
+```
+recyclerView.setDownloadPath(Environment.getExternalStorageDirectory() + "/MyVideo"); //optional
+recyclerView.setDownloadVideos(true); // false by default
+```
+Optionally you can start pre-downloading all the videos by passing list of URLs to function as below:
+```
+List<String> urls = new ArrayList<>();
+ for (MyModel object : modelList) {
+     if (object.getVideo_url() != null && object.getVideo_url().endsWith(".mp4"))
+         urls.add(object.getVideo_url());
+ }
+recyclerView.preDownload(urls);
+```
+Note: Do not forget to add WRITE_EXTERNAL_STORAGE permission in the Manifest file and also ask for runtime permission in devices above Marshmallow.
+
 # Use Cloudinary (Optional)
 
 It is recommended to use <a href="https://cloudinary.com" target="_blank">Cloudinary.com</a> to host your videos as it provides easy <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#generating_video_thumbnails" target="_blank">thumbnail-generation</a> and <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#resizing_and_cropping_videos" target="_blank">resizing/cropping videos</a> on-the-fly.
