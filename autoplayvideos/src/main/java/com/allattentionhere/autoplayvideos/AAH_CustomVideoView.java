@@ -103,7 +103,6 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 //                  mMediaPlayer.setOnErrorListener(this);
                     mMediaPlayer.setLooping(isLooping);
                     mMediaPlayer.setDataSource(getContext(), mSource);
-//                    Log.d("k9download", "mSource: " + mSource);
                     mMediaPlayer.setSurface(surface);
                     mMediaPlayer.prepare();
                     if (mMediaPlayer != null) mMediaPlayer.start();
@@ -195,7 +194,6 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 //            mMediaPlayer.setOnErrorListener(this);
                 mMediaPlayer.setLooping(isLooping);
                 mMediaPlayer.setDataSource(getContext(), mSource);
-//                Log.d("k9download", "mSource: " + mSource);
                 mMediaPlayer.setSurface(surface);
                 mMediaPlayer.prepare();
                 mMediaPlayer.start();
