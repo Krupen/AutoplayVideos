@@ -27,6 +27,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     private Activity _act;
     private boolean playOnlyFirstVideo = false;
     private boolean downloadVideos = false;
+    private boolean checkForMp4 = true;
     private String downloadPath = Environment.getExternalStorageDirectory() + "/Video";
 
     public AAH_CustomRecyclerView(Context context) {
@@ -73,7 +74,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                 final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                                 try {
                                     AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
-                                    if (i >= 0 && cvh != null && cvh.getVideoUrl().endsWith(".mp4")) {
+                                    if (i >= 0 && cvh != null && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
                                         if (!foundFirstVideo) {
                                             foundFirstVideo = true;
                                             if (getString(_act, cvh.getVideoUrl()) != null && new File(getString(_act, cvh.getVideoUrl())).exists()) {
@@ -105,7 +106,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                 final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                                 try {
                                     AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
-                                    if (i >= 0 && cvh != null && cvh.getVideoUrl().endsWith(".mp4")) {
+                                    if (i >= 0 && cvh != null && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
                                         if (getString(_act, cvh.getVideoUrl()) != null && new File(getString(_act, cvh.getVideoUrl())).exists()) {
                                             ((AAH_CustomViewHolder) holder).initVideoView(getString(_act, cvh.getVideoUrl()), _act);
                                         } else {
@@ -135,7 +136,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             try {
                                 AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
-                                if (i >= 0 && cvh != null && cvh.getVideoUrl().endsWith(".mp4")) {
+                                if (i >= 0 && cvh != null && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
                             } catch (Exception e) {
@@ -148,7 +149,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                             final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
                             try {
                                 AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
-                                if (i >= 0 && cvh != null && cvh.getVideoUrl().endsWith(".mp4")) {
+                                if (i >= 0 && cvh != null && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
                             } catch (Exception e) {
@@ -202,7 +203,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
         urls.clear();
         urls.addAll(hashSet);
         for (int i = 0; i < urls.size(); i++) {
-            if ((AAH_Utils.getString(_act, urls.get(i)) == null || !(new File(getString(_act, urls.get(i))).exists())) ) {
+            if ((AAH_Utils.getString(_act, urls.get(i)) == null || !(new File(getString(_act, urls.get(i))).exists()))) {
                 Intent intent = new Intent(Intent.ACTION_SYNC, null, _act, AAH_DownloadService.class);
                 intent.putExtra("url", urls.get(i));
                 intent.putExtra("path", downloadPath);
@@ -210,5 +211,9 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                 _act.startService(intent);
             }
         }
+    }
+
+    public void setCheckForMp4(boolean checkForMp4) {
+        this.checkForMp4 = checkForMp4;
     }
 }

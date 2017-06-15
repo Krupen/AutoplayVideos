@@ -62,7 +62,7 @@ public class AAH_DownloadService extends IntentService {
             f.close();
             AAH_Utils.saveString(getApplicationContext(), requestUrl, rootFile.getAbsolutePath());
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             return false;
         }
 

@@ -29,7 +29,7 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
         this.aah_vi.getCustomVideoView().startVideo();
     }
 
-    private void hideImagePlaceHolder() {
+    protected void hideImagePlaceHolder() {
         this.aah_vi.getImageView().setVisibility(View.GONE);
     }
 

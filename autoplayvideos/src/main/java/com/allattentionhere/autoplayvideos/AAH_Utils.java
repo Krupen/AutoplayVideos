@@ -39,4 +39,9 @@ public class AAH_Utils {
         sharedPrefs.edit().remove(key).apply();
     }
 
+    public static boolean isVideoDownloaded(Context c, String url) {
+        return getString(c, url) != null;
+
+    }
+
 }
