@@ -44,7 +44,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.1.0'
+	 compile 'com.allattentionhere:autoplayvideos:0.1.1'
 }
 ```
 
@@ -54,7 +54,7 @@ dependencies {
 <dependency>
   <groupId>com.allattentionhere</groupId>
   <artifactId>autoplayvideos</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -240,6 +240,14 @@ List<String> urls = new ArrayList<>();
 recyclerView.preDownload(urls);
 ```
 Note: Do not forget to add WRITE_EXTERNAL_STORAGE permission in the Manifest file and also ask for runtime permission in devices above Marshmallow.
+
+
+### Remove check for .mp4 (Optional)
+By default it checks for url to end with `.mp4` else it is not considered as video URL. You can override this by setting parameter as below. Please use this with caution and make sure you provide video URL only.
+```
+recyclerView.setCheckForMp4(false); // true by default
+```
+
 
 # Use Cloudinary (Optional)
 
