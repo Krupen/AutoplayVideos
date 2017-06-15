@@ -179,7 +179,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
 
     public void startDownloadInBackground(String url) {
         /* Starting Download Service */
-        if ((AAH_Utils.getString(_act, url) == null || !(new File(getString(_act, url)).exists()))) {
+        if ((AAH_Utils.getString(_act, url) == null || !(new File(getString(_act, url)).exists())) && url != null && !url.equalsIgnoreCase("null")) {
             Intent intent = new Intent(Intent.ACTION_SYNC, null, _act, AAH_DownloadService.class);
         /* Send optional extras to Download IntentService */
             intent.putExtra("url", url);
@@ -203,7 +203,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
         urls.clear();
         urls.addAll(hashSet);
         for (int i = 0; i < urls.size(); i++) {
-            if ((AAH_Utils.getString(_act, urls.get(i)) == null || !(new File(getString(_act, urls.get(i))).exists()))) {
+            if ((AAH_Utils.getString(_act, urls.get(i)) == null || !(new File(getString(_act, urls.get(i))).exists())) && urls.get(i) != null && !urls.get(i).equalsIgnoreCase("null")) {
                 Intent intent = new Intent(Intent.ACTION_SYNC, null, _act, AAH_DownloadService.class);
                 intent.putExtra("url", urls.get(i));
                 intent.putExtra("path", downloadPath);
