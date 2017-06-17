@@ -253,6 +253,10 @@ recyclerView.setCheckForMp4(false); // true by default
 
 It is recommended to use <a href="https://cloudinary.com" target="_blank">Cloudinary.com</a> to host your videos as it provides easy <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#generating_video_thumbnails" target="_blank">thumbnail-generation</a> and <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#resizing_and_cropping_videos" target="_blank">resizing/cropping videos</a> on-the-fly.
 
+# Apps by developer
+![Price Stalker](https://play.google.com/store/apps/details?id=com.allattentionhere.pricestalker)   ![Show The Card Game](https://play.google.com/store/apps/details?id=com.allattentionhere.show)
+
+
 # License
 Copyright 2017 Krupen Ghetiya
 
