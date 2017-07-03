@@ -253,6 +253,9 @@ recyclerView.setCheckForMp4(false); // true by default
 
 It is recommended to use <a href="https://cloudinary.com" target="_blank">Cloudinary.com</a> to host your videos as it provides easy <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#generating_video_thumbnails" target="_blank">thumbnail-generation</a> and <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#resizing_and_cropping_videos" target="_blank">resizing/cropping videos</a> on-the-fly.
 
+# Our other libraries
+* <a href="https://github.com/Krupen/FabulousFilter" target="_blank">FabulousFilter</a>
+
 # Apps by developer
 [![Price Stalker](https://github.com/Krupen/AutoplayVideos/blob/master/pricestalker.png?raw=true)](https://play.google.com/store/apps/details?id=com.allattentionhere.pricestalker)  [![Show Card Game](https://github.com/Krupen/AutoplayVideos/blob/master/show.png?raw=true)](https://play.google.com/store/apps/details?id=com.allattentionhere.show)  [![Safio chat](https://github.com/Krupen/AutoplayVideos/blob/master/safiochat.png?raw=true)](https://play.google.com/store/apps/details?id=com.allattentionhere.safio)
 
