@@ -59,6 +59,10 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         //todo
         holder.setImageUrl(list.get(position).getImage_url());
         holder.setVideoUrl(list.get(position).getVideo_url());
+        holder.setLooping(true); //optional; true by default
+        if (holder.isPlaying()) { //optional
+            //do something
+        }
         //load image into imageview
         if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty()) {
             picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());

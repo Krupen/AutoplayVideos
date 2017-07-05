@@ -18,6 +18,7 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
     private AAH_VideoImage aah_vi;
     private String imageUrl;
     private String videoUrl;
+    private boolean isLooping = true;
 
     public AAH_CustomViewHolder(View x) {
         super(x);
@@ -37,7 +38,7 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
         this.aah_vi.getCustomVideoView().setVisibility(View.VISIBLE);
         Uri uri = Uri.parse(url);
         this.aah_vi.getCustomVideoView().setSource(uri);
-        this.aah_vi.getCustomVideoView().setLooping(true);
+        this.aah_vi.getCustomVideoView().setLooping(isLooping);
         this.aah_vi.getCustomVideoView().set_act(_act);
         this.aah_vi.getCustomVideoView().setMyFuncIn(new Callable<Integer>() {
             @Override
@@ -47,15 +48,20 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
+
+    public void setLooping(boolean looping) {
+        isLooping = looping;
+    }
+
     public void pauseVideo() {
         this.aah_vi.getCustomVideoView().pauseVideo();
     }
 
-    public void muteVideo(){
+    public void muteVideo() {
         this.aah_vi.getCustomVideoView().muteVideo();
     }
 
-    public void unmuteVideo(){
+    public void unmuteVideo() {
         this.aah_vi.getCustomVideoView().unmuteVideo();
     }
 
@@ -63,12 +69,12 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
         return aah_vi;
     }
 
-    public ImageView getAAH_ImageView(){
+    public ImageView getAAH_ImageView() {
         return aah_vi.getImageView();
     }
 
     public String getImageUrl() {
-        return imageUrl+"";
+        return imageUrl + "";
     }
 
     public void setImageUrl(String imageUrl) {
@@ -83,7 +89,11 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
 
     public String getVideoUrl() {
 
-        return videoUrl+"";
+        return videoUrl + "";
+    }
+
+    public boolean isPlaying() {
+        return this.aah_vi.getCustomVideoView().isPlaying();
     }
 
     public void setVideoUrl(String videoUrl) {
