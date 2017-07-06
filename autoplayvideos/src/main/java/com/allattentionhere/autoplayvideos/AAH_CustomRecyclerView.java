@@ -80,16 +80,16 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void playAvailableVideos(int newState) {
-        Log.d("k9trace", "playAvailableVideos: ");
+//        Log.d("trace", "playAvailableVideos: ");
         List<Thread> threads = new ArrayList<Thread>();
         if (newState == 0) {
             int firstVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
             int lastVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
-            Log.d("k9trace", "firstVisiblePosition: " + firstVisiblePosition + " |lastVisiblePosition: " + lastVisiblePosition);
+//            Log.d("trace", "firstVisiblePosition: " + firstVisiblePosition + " |lastVisiblePosition: " + lastVisiblePosition);
             if (firstVisiblePosition >= 0) {
                 Rect rect_parent = new Rect();
                 getGlobalVisibleRect(rect_parent);
-//                        Log.d("k9pos", "recyclerview left: " + rect_parent.left + " | right: " + rect_parent.right + " | top: " + rect_parent.top + " | bottom: " + rect_parent.bottom);
+//                        Log.d("pos", "recyclerview left: " + rect_parent.left + " | right: " + rect_parent.right + " | top: " + rect_parent.top + " | bottom: " + rect_parent.bottom);
                 if (playOnlyFirstVideo) {
                     boolean foundFirstVideo = false;
                     for (int i = firstVisiblePosition; i <= lastVisiblePosition; i++) {
@@ -101,9 +101,9 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                 cvh.getAah_vi().getLocationOnScreen(location);
                                 Rect rect_child = new Rect(location[0], location[1], location[0] + cvh.getAah_vi().getWidth(), location[1] + cvh.getAah_vi().getHeight());
 //                                        Log.d("k9pos", "x: " + location[0] + " | x right: " + (location[0] + cvh.getAah_vi().getWidth()) + " | y: " + location[1] + " | y bottom: " + (location[1] + cvh.getAah_vi().getHeight()));
-                                Log.d("k9trace", i + " contains: " + rect_parent.contains(rect_child));
+//                                Log.d("trace", i + " contains: " + rect_parent.contains(rect_child));
                                 if (!foundFirstVideo && rect_parent.contains(rect_child)) {
-                                    Log.d("k9trace", i + " foundFirstVideo: " + cvh.getVideoUrl());
+//                                    Log.d("trace", i + " foundFirstVideo: " + cvh.getVideoUrl());
                                     foundFirstVideo = true;
                                     if (getString(_act, cvh.getVideoUrl()) != null && new File(getString(_act, cvh.getVideoUrl())).exists()) {
                                         ((AAH_CustomViewHolder) holder).initVideoView(getString(_act, cvh.getVideoUrl()), _act);
@@ -121,7 +121,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     t.start();
                                     threads.add(t);
                                 } else {
-                                    Log.d("k9trace", i + " not foundFirstVideo: ");
+//                                    Log.d("trace", i + " not foundFirstVideo: ");
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
                             }
@@ -139,7 +139,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                 cvh.getAah_vi().getLocationOnScreen(location);
                                 Rect rect_child = new Rect(location[0], location[1], location[0] + cvh.getAah_vi().getWidth(), location[1] + cvh.getAah_vi().getHeight());
 //                                        Log.d("k9pos", "x: " + location[0] + " | x right: " + (location[0] + cvh.getAah_vi().getWidth()) + " | y: " + location[1] + " | y bottom: " + (location[1] + cvh.getAah_vi().getHeight()));
-                                Log.d("k9trace", i + " contains: " + rect_parent.contains(rect_child));
+//                                Log.d("trace", i + " contains: " + rect_parent.contains(rect_child));
                                 if (rect_parent.contains(rect_child)) {
                                     if (getString(_act, cvh.getVideoUrl()) != null && new File(getString(_act, cvh.getVideoUrl())).exists()) {
                                         ((AAH_CustomViewHolder) holder).initVideoView(getString(_act, cvh.getVideoUrl()), _act);
@@ -232,7 +232,6 @@ public class AAH_CustomRecyclerView extends RecyclerView {
         super.onDraw(c);
         if (!initilized) {
             initilized = true;
-            Log.d("k9count", "onDraw: ");
             //to start initially
             playAvailableVideos(0);
         }

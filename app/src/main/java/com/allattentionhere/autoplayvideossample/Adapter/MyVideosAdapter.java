@@ -27,7 +27,7 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     public class MyViewHolder extends AAH_CustomViewHolder {
 
         final TextView tv;
-        final ImageView img_vol;
+        final ImageView img_vol, img_playback;
 
         //to mute/un-mute video (optional)
         boolean isMuted;
@@ -36,8 +36,22 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
             super(x);
             tv = ButterKnife.findById(x, R.id.tv);
             img_vol = ButterKnife.findById(x, R.id.img_vol);
+            img_playback = ButterKnife.findById(x, R.id.img_playback);
         }
 
+        //override this method to get callback when video starts to play
+        @Override
+        public void videoStarted() {
+            super.videoStarted();
+            img_playback.setImageResource(R.drawable.ic_pause);
+        }
+
+        @Override
+        public void pauseVideo() {
+            super.pauseVideo();
+            img_playback.setImageResource(R.drawable.ic_play);
+
+        }
     }
 
     public MyVideosAdapter(List<MyModel> list_urls, Picasso p) {
@@ -61,20 +75,26 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         holder.setImageUrl(list.get(position).getImage_url());
         holder.setVideoUrl(list.get(position).getVideo_url());
         holder.setLooping(true); //optional; true by default
-        if (holder.isPlaying()) { //optional
-            //do something
-            Log.d("k9play", "isPlaying: true");
-        }else {
-            Log.d("k9play", "isPlaying: false");
 
-        }
         //load image into imageview
         if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty()) {
             picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
         }
 
+        //to play pause videos manually (optional)
+        ((MyViewHolder) holder).img_playback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.isPlaying()) {
+                    holder.pauseVideo();
+                } else {
+                    holder.playVideo();
+                }
+            }
+        });
+
         //to mute/un-mute video (optional)
-        holder.getAah_vi().setOnClickListener(new View.OnClickListener() {
+        ((MyViewHolder) holder).img_vol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (((MyViewHolder) holder).isMuted) {
@@ -88,11 +108,20 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
             }
         });
 
+
         if (list.get(position).getVideo_url() == null) {
             ((MyViewHolder) holder).img_vol.setVisibility(View.GONE);
+            ((MyViewHolder) holder).img_playback.setVisibility(View.GONE);
         } else {
             ((MyViewHolder) holder).img_vol.setVisibility(View.VISIBLE);
+            ((MyViewHolder) holder).img_playback.setVisibility(View.VISIBLE);
+            if (((MyViewHolder) holder).isMuted) {
+                ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_mute);
+            } else {
+                ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_unmute);
+            }
         }
+
 
     }
 

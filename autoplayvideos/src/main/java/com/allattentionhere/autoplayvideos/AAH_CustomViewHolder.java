@@ -30,7 +30,7 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
         this.aah_vi.getCustomVideoView().startVideo();
     }
 
-    protected void hideImagePlaceHolder() {
+    public void videoStarted() {
         this.aah_vi.getImageView().setVisibility(View.GONE);
     }
 
@@ -43,7 +43,7 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
         this.aah_vi.getCustomVideoView().setMyFuncIn(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
-                hideImagePlaceHolder();
+                videoStarted();
                 return null;
             }
         });
