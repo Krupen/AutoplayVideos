@@ -115,6 +115,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     }
                                     Thread t = new Thread() {
                                         public void run() {
+                                            if (!((AAH_CustomViewHolder) holder).isPaused())
                                             ((AAH_CustomViewHolder) holder).playVideo();
                                         }
                                     };
@@ -151,7 +152,8 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     }
                                     Thread t = new Thread() {
                                         public void run() {
-                                            ((AAH_CustomViewHolder) holder).playVideo();
+                                            if (!((AAH_CustomViewHolder) holder).isPaused())
+                                                ((AAH_CustomViewHolder) holder).playVideo();
                                         }
                                     };
                                     t.start();

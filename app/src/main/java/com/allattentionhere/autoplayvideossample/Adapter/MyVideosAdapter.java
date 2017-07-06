@@ -94,8 +94,10 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
             public void onClick(View v) {
                 if (holder.isPlaying()) {
                     holder.pauseVideo();
+                    holder.setPaused(true);
                 } else {
                     holder.playVideo();
+                    holder.setPaused(false);
                 }
             }
         });

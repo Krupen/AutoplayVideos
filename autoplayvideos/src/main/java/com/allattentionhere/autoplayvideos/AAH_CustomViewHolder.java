@@ -19,10 +19,11 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
     private String imageUrl;
     private String videoUrl;
     private boolean isLooping = true;
+    private boolean isPaused = false;
+
 
     public AAH_CustomViewHolder(View x) {
         super(x);
-
         aah_vi = (AAH_VideoImage) x.findViewWithTag("aah_vi");
     }
 
@@ -88,7 +89,6 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
     }
 
     public String getVideoUrl() {
-
         return videoUrl + "";
     }
 
@@ -98,5 +98,13 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
+    }
+
+    public boolean isPaused() {
+        return isPaused;
     }
 }
