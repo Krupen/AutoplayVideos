@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.allattentionhere.autoplayvideos.AAH_CustomViewHolder;
 import com.allattentionhere.autoplayvideos.AAH_Utils;
 import com.allattentionhere.autoplayvideossample.Adapter.MyVideosAdapter;
 import com.allattentionhere.autoplayvideos.AAH_CustomRecyclerView;
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setPlayOnlyFirstVideo(true); // false by default
 
         //optional - by default we check if url ends with ".mp4". If your urls do not end with mp4, you can set this param to false and implement your own check to see if video points to url
-        recyclerView.setCheckForMp4(false);
+        recyclerView.setCheckForMp4(false); //true by default
 
         //optional - download videos to local storage (requires "android.permission.WRITE_EXTERNAL_STORAGE" in manifest or ask in runtime)
         recyclerView.setDownloadPath(Environment.getExternalStorageDirectory() + "/MyVideo"); // (Environment.getExternalStorageDirectory() + "/Video") by default
@@ -93,11 +96,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.preDownload(urls);
 
         recyclerView.setAdapter(mAdapter);
-        //to init videos before scrolling
-        recyclerView.smoothScrollBy(0, 1);
-        recyclerView.smoothScrollBy(0, -1);
+        //call this function when u want to start autoplay on loading async lists (eg firebase)
+//        recyclerView.playAvailableVideos(0);
 
     }
-
-
 }

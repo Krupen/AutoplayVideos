@@ -54,6 +54,11 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
         if (this.getSurfaceTexture() != null) {
             if (mMediaPlayer != null) {
                 mMediaPlayer.start();
+                try {
+                    myFuncIn.call();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } else {
                 Surface surface = new Surface(this.getSurfaceTexture());
                 try {
@@ -142,7 +147,11 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
     public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
         if (mMediaPlayer != null) {
             mMediaPlayer.start();
-
+            try {
+                myFuncIn.call();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             Surface surface = new Surface(surfaceTexture);
             try {
@@ -249,13 +258,20 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
         }
     }
 
+    public boolean isPlaying() {
+        if (mMediaPlayer != null) {
+            return mMediaPlayer.isPlaying();
+        }
+        return false;
+    }
+
     public void muteVideo() {
-        if (mMediaPlayer!=null)
-        mMediaPlayer.setVolume(0f, 0f);
+        if (mMediaPlayer != null)
+            mMediaPlayer.setVolume(0f, 0f);
     }
 
     public void unmuteVideo() {
-        if (mMediaPlayer!=null)
+        if (mMediaPlayer != null)
             mMediaPlayer.setVolume(1f, 1f);
     }
 }
