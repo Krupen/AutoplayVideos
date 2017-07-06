@@ -286,7 +286,7 @@ Video can be muted/unmuted by adding below code in `onBindViewHolder`:
 
 ### Set looping on videos
 
-Set looping on videos as follows:
+Set looping on videos by adding below code in `onBindViewHolder`:
 ```
 holder.setLooping(true); //optional - true by default
 ```
