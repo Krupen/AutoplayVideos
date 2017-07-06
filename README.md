@@ -136,34 +136,13 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     public class MyViewHolder extends AAH_CustomViewHolder {
         final TextView tv;
 	final ImageView img_vol,img_playback;
-	
-	//to mute/un-mute video (optional)
-        boolean isMuted;
+        boolean isMuted; //to mute/un-mute video (optional)
 	
         public MyViewHolder(View x) {
             super(x);
             tv = ButterKnife.findById(x, R.id.tv);
 	    img_vol = ButterKnife.findById(x, R.id.img_vol);
 	    img_playback = ButterKnife.findById(x, R.id.img_playback);
-        }
-	
-	//override this method to get callback when video starts to play
-        @Override
-        public void videoStarted() {
-            super.videoStarted();
-            img_playback.setImageResource(R.drawable.ic_pause);
-            if (isMuted) {
-                muteVideo();
-                img_vol.setImageResource(R.drawable.ic_mute);
-            } else {
-                unmuteVideo();
-                img_vol.setImageResource(R.drawable.ic_unmute);
-            }
-        }
-        @Override
-        public void pauseVideo() {
-            super.pauseVideo();
-            img_playback.setImageResource(R.drawable.ic_play);
         }
     }
 
@@ -189,45 +168,6 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         //load image/thumbnail into imageview
         if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty())
             picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
-	    
-	holder.setLooping(true); //optional - true by default
-	
-	//to play pause videos manually (optional)
-        ((MyViewHolder) holder).img_playback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.isPlaying()) {
-                    holder.pauseVideo();
-                    holder.setPaused(true);
-                } else {
-                    holder.playVideo();
-                    holder.setPaused(false);
-                }
-            }
-        });
-	
-	//to mute/un-mute video (optional)
-        holder.getAah_vi().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((MyViewHolder) holder).isMuted) {
-                    holder.unmuteVideo();
-                    ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_unmute);
-                } else {
-                    holder.muteVideo();
-                    ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_mute);
-                }
-                ((MyViewHolder) holder).isMuted = !((MyViewHolder) holder).isMuted;
-            }
-        });
-
-        if (list.get(position).getVideo_url() == null) {
-            ((MyViewHolder) holder).img_vol.setVisibility(View.GONE);
-            ((MyViewHolder) holder).img_playback.setVisibility(View.GONE);
-        } else {
-            ((MyViewHolder) holder).img_vol.setVisibility(View.VISIBLE);
-            ((MyViewHolder) holder).img_playback.setVisibility(View.VISIBLE);
-        }
     }
     
     @Override
@@ -280,9 +220,81 @@ By default it checks for url to end with `.mp4` else it is not considered as vid
 recyclerView.setCheckForMp4(false); // true by default
 ```
 
+
+### Get callbacks when videos starts and pauses
+
+You can override the below methods to get callback when video starts to play or pauses.
+```
+	@Override
+        public void videoStarted() {
+            super.videoStarted();
+            img_playback.setImageResource(R.drawable.ic_pause);
+            if (isMuted) {
+                muteVideo();
+                img_vol.setImageResource(R.drawable.ic_mute);
+            } else {
+                unmuteVideo();
+                img_vol.setImageResource(R.drawable.ic_unmute);
+            }
+        }
+        @Override
+        public void pauseVideo() {
+            super.pauseVideo();
+            img_playback.setImageResource(R.drawable.ic_play);
+        }
+```
+
+
+### Play or pause videos manually
+
+You can allow the user to play or pause any particular video.
+```
+	((MyViewHolder) holder).img_playback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.isPlaying()) {
+                    holder.pauseVideo();
+                    holder.setPaused(true);
+                } else {
+                    holder.playVideo();
+                    holder.setPaused(false);
+                }
+            }
+        });
+```
+
+
+### Mute or Unmute the videos
+
+Video can be muted/unmuted as follows:
+```
+	holder.getAah_vi().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((MyViewHolder) holder).isMuted) {
+                    holder.unmuteVideo();
+                    ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_unmute);
+                } else {
+                    holder.muteVideo();
+                    ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_mute);
+                }
+                ((MyViewHolder) holder).isMuted = !((MyViewHolder) holder).isMuted;
+            }
+        });
+```
+
+
+### Set looping on videos
+
+Set looping on videos as follows:
+```
+holder.setLooping(true); //optional - true by default
+```
+
 # Use Cloudinary (Optional)
 
 It is recommended to use <a href="https://cloudinary.com" target="_blank">Cloudinary.com</a> to host your videos as it provides easy <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#generating_video_thumbnails" target="_blank">thumbnail-generation</a> and <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#resizing_and_cropping_videos" target="_blank">resizing/cropping videos</a> on-the-fly.
+
 
 # Changelog
 * <a href="/CHANGELOG.md" target="_blank">Changelog</a>
