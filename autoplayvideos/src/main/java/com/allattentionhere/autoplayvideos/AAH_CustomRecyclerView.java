@@ -3,14 +3,19 @@ package com.allattentionhere.autoplayvideos;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Environment;
+import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewTreeObserver;
 
 
 import java.io.File;
@@ -31,6 +36,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     private boolean downloadVideos = false;
     private boolean checkForMp4 = true;
     private String downloadPath = Environment.getExternalStorageDirectory() + "/Video";
+    boolean initilized = false;
 
     public AAH_CustomRecyclerView(Context context) {
         super(context);
@@ -63,125 +69,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
             @Override
             public void onScrollStateChanged(final RecyclerView recyclerView, final int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                List<Thread> threads = new ArrayList<Thread>();
-                if (newState == 0) {
-                    int firstVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
-                    int lastVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
-                    if (firstVisiblePosition >= 0) {
-                        Rect rect_parent = new Rect();
-                        getGlobalVisibleRect(rect_parent);
-//                        Log.d("k9pos", "recyclerview left: " + rect_parent.left + " | right: " + rect_parent.right + " | top: " + rect_parent.top + " | bottom: " + rect_parent.bottom);
-                        if (playOnlyFirstVideo) {
-                            boolean foundFirstVideo = false;
-                            for (int i = firstVisiblePosition; i <= lastVisiblePosition; i++) {
-                                final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
-                                try {
-                                    AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
-                                    if (i >= 0 && cvh != null && cvh.getVideoUrl() != null && !cvh.getVideoUrl().equalsIgnoreCase("null") && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
-                                        int[] location = new int[2];
-                                        cvh.getAah_vi().getLocationOnScreen(location);
-                                        Rect rect_child = new Rect(location[0], location[1], location[0] + cvh.getAah_vi().getWidth(), location[1] + cvh.getAah_vi().getHeight());
-//                                        Log.d("k9pos", "x: " + location[0] + " | x right: " + (location[0] + cvh.getAah_vi().getWidth()) + " | y: " + location[1] + " | y bottom: " + (location[1] + cvh.getAah_vi().getHeight()));
-                                        Log.d("k9pos", i + " contains: " + rect_parent.contains(rect_child));
-                                        if (!foundFirstVideo && rect_parent.contains(rect_child)) {
-                                            Log.d("k9pos", i + " foundFirstVideo: " + cvh.getVideoUrl());
-                                            foundFirstVideo = true;
-                                            if (getString(_act, cvh.getVideoUrl()) != null && new File(getString(_act, cvh.getVideoUrl())).exists()) {
-                                                ((AAH_CustomViewHolder) holder).initVideoView(getString(_act, cvh.getVideoUrl()), _act);
-                                            } else {
-                                                ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(), _act);
-                                            }
-                                            if (downloadVideos) {
-                                                startDownloadInBackground(cvh.getVideoUrl());
-                                            }
-                                            Thread t = new Thread() {
-                                                public void run() {
-                                                    ((AAH_CustomViewHolder) holder).playVideo();
-                                                }
-                                            };
-                                            t.start();
-                                            threads.add(t);
-                                        } else {
-                                            Log.d("k9pos", i + " not foundFirstVideo: ");
-                                            ((AAH_CustomViewHolder) holder).pauseVideo();
-                                        }
-                                    }
-                                } catch (Exception e) {
-                                }
-                            }
-                        } else {
-                            for (int i = firstVisiblePosition; i <= lastVisiblePosition; i++) {
-                                final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
-                                try {
-                                    AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
-
-                                    if (i >= 0 && cvh != null && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
-                                        int[] location = new int[2];
-                                        cvh.getAah_vi().getLocationOnScreen(location);
-                                        Rect rect_child = new Rect(location[0], location[1], location[0] + cvh.getAah_vi().getWidth(), location[1] + cvh.getAah_vi().getHeight());
-//                                        Log.d("k9pos", "x: " + location[0] + " | x right: " + (location[0] + cvh.getAah_vi().getWidth()) + " | y: " + location[1] + " | y bottom: " + (location[1] + cvh.getAah_vi().getHeight()));
-                                        Log.d("k9pos", i + " contains: " + rect_parent.contains(rect_child));
-                                        if (rect_parent.contains(rect_child)) {
-                                            if (getString(_act, cvh.getVideoUrl()) != null && new File(getString(_act, cvh.getVideoUrl())).exists()) {
-                                                ((AAH_CustomViewHolder) holder).initVideoView(getString(_act, cvh.getVideoUrl()), _act);
-                                            } else {
-                                                ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(), _act);
-                                            }
-                                            if (downloadVideos) {
-                                                startDownloadInBackground(cvh.getVideoUrl());
-                                            }
-                                            Thread t = new Thread() {
-                                                public void run() {
-                                                    ((AAH_CustomViewHolder) holder).playVideo();
-                                                }
-                                            };
-                                            t.start();
-                                            threads.add(t);
-                                        } else {
-                                            ((AAH_CustomViewHolder) holder).pauseVideo();
-                                        }
-                                    }
-                                } catch (Exception e) {
-
-                                }
-
-                            }
-                        }
-                    }
-
-//                    if (firstCompletelyVisiblePosition >= 0 && firstCompletelyVisiblePosition != firstVisiblePosition) {
-//                        for (int i = firstVisiblePosition; i < firstCompletelyVisiblePosition; i++) {
-//                            final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
-//                            try {
-//                                AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
-//                                if (i >= 0 && cvh != null && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
-//                                    ((AAH_CustomViewHolder) holder).pauseVideo();
-//                                }
-//                            } catch (Exception e) {
-//
-//                            }
-//                        }
-//                    }
-//                    if (lastCompletelyVisiblePosition >= 0 && lastCompletelyVisiblePosition != lastVisiblePosition) {
-//                        for (int i = lastVisiblePosition; i > lastCompletelyVisiblePosition; i--) {
-//                            final RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
-//                            try {
-//                                AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
-//                                if (i >= 0 && cvh != null && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
-//                                    ((AAH_CustomViewHolder) holder).pauseVideo();
-//                                }
-//                            } catch (Exception e) {
-//                            }
-//                        }
-//                    }
-                } else if (threads.size() > 0) {
-                    for (Thread t : threads) {
-                        t.interrupt();
-                        t.stop();
-                        t.destroy();
-                    }
-                    threads.clear();
-                }
+                playAvailableVideos(newState);
             }
 
             @Override
@@ -190,6 +78,105 @@ public class AAH_CustomRecyclerView extends RecyclerView {
             }
         });
     }
+
+    public void playAvailableVideos(int newState) {
+        Log.d("k9trace", "playAvailableVideos: ");
+        List<Thread> threads = new ArrayList<Thread>();
+        if (newState == 0) {
+            int firstVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
+            int lastVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
+            Log.d("k9trace", "firstVisiblePosition: " + firstVisiblePosition + " |lastVisiblePosition: " + lastVisiblePosition);
+            if (firstVisiblePosition >= 0) {
+                Rect rect_parent = new Rect();
+                getGlobalVisibleRect(rect_parent);
+//                        Log.d("k9pos", "recyclerview left: " + rect_parent.left + " | right: " + rect_parent.right + " | top: " + rect_parent.top + " | bottom: " + rect_parent.bottom);
+                if (playOnlyFirstVideo) {
+                    boolean foundFirstVideo = false;
+                    for (int i = firstVisiblePosition; i <= lastVisiblePosition; i++) {
+                        final RecyclerView.ViewHolder holder = findViewHolderForAdapterPosition(i);
+                        try {
+                            AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
+                            if (i >= 0 && cvh != null && cvh.getVideoUrl() != null && !cvh.getVideoUrl().equalsIgnoreCase("null") && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
+                                int[] location = new int[2];
+                                cvh.getAah_vi().getLocationOnScreen(location);
+                                Rect rect_child = new Rect(location[0], location[1], location[0] + cvh.getAah_vi().getWidth(), location[1] + cvh.getAah_vi().getHeight());
+//                                        Log.d("k9pos", "x: " + location[0] + " | x right: " + (location[0] + cvh.getAah_vi().getWidth()) + " | y: " + location[1] + " | y bottom: " + (location[1] + cvh.getAah_vi().getHeight()));
+                                Log.d("k9trace", i + " contains: " + rect_parent.contains(rect_child));
+                                if (!foundFirstVideo && rect_parent.contains(rect_child)) {
+                                    Log.d("k9trace", i + " foundFirstVideo: " + cvh.getVideoUrl());
+                                    foundFirstVideo = true;
+                                    if (getString(_act, cvh.getVideoUrl()) != null && new File(getString(_act, cvh.getVideoUrl())).exists()) {
+                                        ((AAH_CustomViewHolder) holder).initVideoView(getString(_act, cvh.getVideoUrl()), _act);
+                                    } else {
+                                        ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(), _act);
+                                    }
+                                    if (downloadVideos) {
+                                        startDownloadInBackground(cvh.getVideoUrl());
+                                    }
+                                    Thread t = new Thread() {
+                                        public void run() {
+                                            ((AAH_CustomViewHolder) holder).playVideo();
+                                        }
+                                    };
+                                    t.start();
+                                    threads.add(t);
+                                } else {
+                                    Log.d("k9trace", i + " not foundFirstVideo: ");
+                                    ((AAH_CustomViewHolder) holder).pauseVideo();
+                                }
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                } else {
+                    for (int i = firstVisiblePosition; i <= lastVisiblePosition; i++) {
+                        final RecyclerView.ViewHolder holder = findViewHolderForAdapterPosition(i);
+                        try {
+                            AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) holder;
+
+                            if (i >= 0 && cvh != null && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
+                                int[] location = new int[2];
+                                cvh.getAah_vi().getLocationOnScreen(location);
+                                Rect rect_child = new Rect(location[0], location[1], location[0] + cvh.getAah_vi().getWidth(), location[1] + cvh.getAah_vi().getHeight());
+//                                        Log.d("k9pos", "x: " + location[0] + " | x right: " + (location[0] + cvh.getAah_vi().getWidth()) + " | y: " + location[1] + " | y bottom: " + (location[1] + cvh.getAah_vi().getHeight()));
+                                Log.d("k9trace", i + " contains: " + rect_parent.contains(rect_child));
+                                if (rect_parent.contains(rect_child)) {
+                                    if (getString(_act, cvh.getVideoUrl()) != null && new File(getString(_act, cvh.getVideoUrl())).exists()) {
+                                        ((AAH_CustomViewHolder) holder).initVideoView(getString(_act, cvh.getVideoUrl()), _act);
+                                    } else {
+                                        ((AAH_CustomViewHolder) holder).initVideoView(cvh.getVideoUrl(), _act);
+                                    }
+                                    if (downloadVideos) {
+                                        startDownloadInBackground(cvh.getVideoUrl());
+                                    }
+                                    Thread t = new Thread() {
+                                        public void run() {
+                                            ((AAH_CustomViewHolder) holder).playVideo();
+                                        }
+                                    };
+                                    t.start();
+                                    threads.add(t);
+                                } else {
+                                    ((AAH_CustomViewHolder) holder).pauseVideo();
+                                }
+                            }
+                        } catch (Exception e) {
+
+                        }
+
+                    }
+                }
+            }
+        } else if (threads.size() > 0) {
+            for (Thread t : threads) {
+                t.interrupt();
+                t.stop();
+                t.destroy();
+            }
+            threads.clear();
+        }
+    }
+
 
     public void setPlayOnlyFirstVideo(boolean playOnlyFirstVideo) {
         this.playOnlyFirstVideo = playOnlyFirstVideo;
@@ -239,4 +226,17 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     public void setCheckForMp4(boolean checkForMp4) {
         this.checkForMp4 = checkForMp4;
     }
+
+    @Override
+    public void onDraw(Canvas c) {
+        super.onDraw(c);
+        if (!initilized) {
+            initilized = true;
+            Log.d("k9count", "onDraw: ");
+            //to start initially
+            playAvailableVideos(0);
+        }
+    }
+
+
 }

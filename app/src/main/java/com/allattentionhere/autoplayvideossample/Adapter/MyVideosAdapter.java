@@ -1,6 +1,7 @@
 package com.allattentionhere.autoplayvideossample.Adapter;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,10 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         holder.setLooping(true); //optional; true by default
         if (holder.isPlaying()) { //optional
             //do something
+            Log.d("k9play", "isPlaying: true");
+        }else {
+            Log.d("k9play", "isPlaying: false");
+
         }
         //load image into imageview
         if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty()) {
