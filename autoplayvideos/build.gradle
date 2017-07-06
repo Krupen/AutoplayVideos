@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/Krupen/AutoplayVideos'
     gitUrl = 'https://github.com/Krupen/AutoplayVideos.git'
 
-    libraryVersion = '0.1.1'
+    libraryVersion = '0.1.2'
 
     developerId = 'krupen'
     developerName = 'Krupen Ghetiya'

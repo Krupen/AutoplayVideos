@@ -44,6 +44,13 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         public void videoStarted() {
             super.videoStarted();
             img_playback.setImageResource(R.drawable.ic_pause);
+            if (isMuted) {
+                muteVideo();
+                img_vol.setImageResource(R.drawable.ic_mute);
+            } else {
+                unmuteVideo();
+                img_vol.setImageResource(R.drawable.ic_unmute);
+            }
         }
 
         @Override
@@ -115,11 +122,6 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         } else {
             ((MyViewHolder) holder).img_vol.setVisibility(View.VISIBLE);
             ((MyViewHolder) holder).img_playback.setVisibility(View.VISIBLE);
-            if (((MyViewHolder) holder).isMuted) {
-                ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_mute);
-            } else {
-                ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_unmute);
-            }
         }
 
 
