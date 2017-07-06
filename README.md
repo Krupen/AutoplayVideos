@@ -223,7 +223,7 @@ recyclerView.setCheckForMp4(false); // true by default
 
 ### Get callbacks when videos starts and pauses
 
-You can override the below methods to get callback when video starts to play or pauses.
+You can override the below methods of `AAH_CustomViewHolder` to get callback when video starts to play or pauses.
 ```
 	@Override
         public void videoStarted() {
@@ -247,7 +247,7 @@ You can override the below methods to get callback when video starts to play or 
 
 ### Play or pause videos manually
 
-You can allow the user to play or pause any particular video.
+You can allow the user to play or pause any video by adding below code in `onBindViewHolder`:
 ```
 	((MyViewHolder) holder).img_playback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,7 +266,7 @@ You can allow the user to play or pause any particular video.
 
 ### Mute or Unmute the videos
 
-Video can be muted/unmuted as follows:
+Video can be muted/unmuted by adding below code in `onBindViewHolder`:
 ```
 	holder.getAah_vi().setOnClickListener(new View.OnClickListener() {
             @Override
