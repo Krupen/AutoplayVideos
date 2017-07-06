@@ -7,7 +7,6 @@
 
 
 This library is created with the purpose to implement recyclerview with videos easily.
-This is the first version of the library and suggestions/contributions to optimize memory and CPU usage are most welcome to improvise the library.
 
 It is targeted at solving following problems:
 
@@ -44,7 +43,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.1.1'
+	 compile 'com.allattentionhere:autoplayvideos:0.1.2'
 }
 ```
 
@@ -54,7 +53,7 @@ dependencies {
 <dependency>
   <groupId>com.allattentionhere</groupId>
   <artifactId>autoplayvideos</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <type>pom</type>
 </dependency>
 ```
@@ -136,7 +135,7 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
 
     public class MyViewHolder extends AAH_CustomViewHolder {
         final TextView tv;
-	final ImageView img_vol;
+	final ImageView img_vol,img_playback;
 	
 	//to mute/un-mute video (optional)
         boolean isMuted;
@@ -145,6 +144,26 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
             super(x);
             tv = ButterKnife.findById(x, R.id.tv);
 	    img_vol = ButterKnife.findById(x, R.id.img_vol);
+	    img_playback = ButterKnife.findById(x, R.id.img_playback);
+        }
+	
+	//override this method to get callback when video starts to play
+        @Override
+        public void videoStarted() {
+            super.videoStarted();
+            img_playback.setImageResource(R.drawable.ic_pause);
+            if (isMuted) {
+                muteVideo();
+                img_vol.setImageResource(R.drawable.ic_mute);
+            } else {
+                unmuteVideo();
+                img_vol.setImageResource(R.drawable.ic_unmute);
+            }
+        }
+        @Override
+        public void pauseVideo() {
+            super.pauseVideo();
+            img_playback.setImageResource(R.drawable.ic_play);
         }
     }
 
@@ -171,6 +190,22 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty())
             picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
 	    
+	holder.setLooping(true); //optional - true by default
+	
+	//to play pause videos manually (optional)
+        ((MyViewHolder) holder).img_playback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.isPlaying()) {
+                    holder.pauseVideo();
+                    holder.setPaused(true);
+                } else {
+                    holder.playVideo();
+                    holder.setPaused(false);
+                }
+            }
+        });
+	
 	//to mute/un-mute video (optional)
         holder.getAah_vi().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,10 +221,12 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
             }
         });
 
-        if (list.get(position).getVideo_url()==null){
+        if (list.get(position).getVideo_url() == null) {
             ((MyViewHolder) holder).img_vol.setVisibility(View.GONE);
-        }else {
+            ((MyViewHolder) holder).img_playback.setVisibility(View.GONE);
+        } else {
             ((MyViewHolder) holder).img_vol.setVisibility(View.VISIBLE);
+            ((MyViewHolder) holder).img_playback.setVisibility(View.VISIBLE);
         }
     }
     
@@ -207,13 +244,8 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
 
 Finally `setActivity` in your Activity before setting the adapter and (Optional) scroll programmatically to initiate videos on initial screen:
 ```
- //todo before setAdapter
-    recyclerView.setActivity(this);
-    
+    recyclerView.setActivity(this); //todo before setAdapter
     recyclerView.setAdapter(mAdapter);
- //to init videos before scrolling
-    recyclerView.smoothScrollBy(0,1);
-    recyclerView.smoothScrollBy(0,-1);
 ```
 
 
@@ -248,10 +280,12 @@ By default it checks for url to end with `.mp4` else it is not considered as vid
 recyclerView.setCheckForMp4(false); // true by default
 ```
 
-
 # Use Cloudinary (Optional)
 
 It is recommended to use <a href="https://cloudinary.com" target="_blank">Cloudinary.com</a> to host your videos as it provides easy <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#generating_video_thumbnails" target="_blank">thumbnail-generation</a> and <a href="http://cloudinary.com/documentation/video_manipulation_and_delivery#resizing_and_cropping_videos" target="_blank">resizing/cropping videos</a> on-the-fly.
+
+# Changelog
+* <a href="/CHANGELOG.md" target="_blank">Changelog</a>
 
 # Our other libraries
 * <a href="https://github.com/Krupen/FabulousFilter" target="_blank">FabulousFilter</a>
