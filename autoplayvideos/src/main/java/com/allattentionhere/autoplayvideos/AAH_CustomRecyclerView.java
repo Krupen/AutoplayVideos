@@ -239,5 +239,16 @@ public class AAH_CustomRecyclerView extends RecyclerView {
         }
     }
 
+    public void stopVideos(){
+        for (int i = 0; i < getChildCount(); i++) {
+            if (findViewHolderForAdapterPosition(i) instanceof AAH_CustomViewHolder) {
+                final AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) findViewHolderForAdapterPosition(i);
+                if (cvh != null && cvh.getVideoUrl() != null && !cvh.getVideoUrl().equalsIgnoreCase("null") && !cvh.getVideoUrl().isEmpty() && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
+                    cvh.pauseVideo();
+                }
+            }
+        }
+    }
+
 
 }

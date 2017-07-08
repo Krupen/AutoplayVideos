@@ -104,16 +104,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        boolean checkForMp4 = false;
-
-        //add this code to pause videos when app is minimised or paused
-        for (int i = 0; i < modelList.size(); i++) {
-            if (recyclerView.findViewHolderForAdapterPosition(i) instanceof AAH_CustomViewHolder) {
-                final AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) recyclerView.findViewHolderForAdapterPosition(i);
-                if (cvh != null && cvh.getVideoUrl() != null && !cvh.getVideoUrl().equalsIgnoreCase("null") && !cvh.getVideoUrl().isEmpty() && (cvh.getVideoUrl().endsWith(".mp4") || !checkForMp4)) {
-                    cvh.pauseVideo();
-                }
-            }
-        }
+        //add this code to pause videos (when app is minimised or paused)
+        recyclerView.stopVideos();
     }
 }
