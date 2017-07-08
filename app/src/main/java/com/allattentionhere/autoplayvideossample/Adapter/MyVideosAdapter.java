@@ -25,13 +25,10 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     private final Picasso picasso;
 
     public class MyViewHolder extends AAH_CustomViewHolder {
-
         final TextView tv;
         final ImageView img_vol, img_playback;
-
         //to mute/un-mute video (optional)
         boolean isMuted;
-
         public MyViewHolder(View x) {
             super(x);
             tv = ButterKnife.findById(x, R.id.tv);
@@ -52,15 +49,12 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
                 img_vol.setImageResource(R.drawable.ic_unmute);
             }
         }
-
         @Override
         public void pauseVideo() {
             super.pauseVideo();
             img_playback.setImageResource(R.drawable.ic_play);
-
         }
     }
-
     public MyVideosAdapter(List<MyModel> list_urls, Picasso p) {
         this.list = list_urls;
         this.picasso = p;
@@ -73,7 +67,6 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         return new MyViewHolder(itemView);
     }
 
-
     @Override
     public void onBindViewHolder(final AAH_CustomViewHolder holder, int position) {
         ((MyViewHolder) holder).tv.setText(list.get(position).getName());
@@ -81,12 +74,13 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         //todo
         holder.setImageUrl(list.get(position).getImage_url());
         holder.setVideoUrl(list.get(position).getVideo_url());
-        holder.setLooping(true); //optional; true by default
 
         //load image into imageview
         if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty()) {
             picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
         }
+
+        holder.setLooping(true); //optional - true by default
 
         //to play pause videos manually (optional)
         ((MyViewHolder) holder).img_playback.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +111,6 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
             }
         });
 
-
         if (list.get(position).getVideo_url() == null) {
             ((MyViewHolder) holder).img_vol.setVisibility(View.GONE);
             ((MyViewHolder) holder).img_playback.setVisibility(View.GONE);
@@ -125,8 +118,6 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
             ((MyViewHolder) holder).img_vol.setVisibility(View.VISIBLE);
             ((MyViewHolder) holder).img_playback.setVisibility(View.VISIBLE);
         }
-
-
     }
 
 
