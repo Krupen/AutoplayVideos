@@ -43,7 +43,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.1.2'
+	 compile 'com.allattentionhere:autoplayvideos:0.1.3'
 }
 ```
 
@@ -53,7 +53,7 @@ dependencies {
 <dependency>
   <groupId>com.allattentionhere</groupId>
   <artifactId>autoplayvideos</artifactId>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
   <type>pom</type>
 </dependency>
 ```
@@ -221,8 +221,18 @@ recyclerView.setCheckForMp4(false); // true by default
 ```
 
 
-### Get callbacks when videos starts and pauses
+### Pause videos manually (Optional)
+Call the following method to stop the videos when Activity/Fragment stops (User receives call, minimizes app etc)
+```
+@Override
+    protected void onStop() {
+        super.onStop();
+        recyclerView.stopVideos();
+    }
+```
 
+
+### Get callbacks when videos starts and pauses
 You can override the below methods of `AAH_CustomViewHolder` to get callback when video starts to play or pauses.
 ```
 	@Override
@@ -246,7 +256,6 @@ You can override the below methods of `AAH_CustomViewHolder` to get callback whe
 
 
 ### Play or pause videos manually
-
 You can allow the user to play or pause any video by adding below code in `onBindViewHolder`:
 ```
 	((MyViewHolder) holder).img_playback.setOnClickListener(new View.OnClickListener() {
@@ -265,7 +274,6 @@ You can allow the user to play or pause any video by adding below code in `onBin
 
 
 ### Mute or Unmute the videos
-
 Video can be muted/unmuted by adding below code in `onBindViewHolder`:
 ```
 	holder.getAah_vi().setOnClickListener(new View.OnClickListener() {
@@ -285,7 +293,6 @@ Video can be muted/unmuted by adding below code in `onBindViewHolder`:
 
 
 ### Set looping on videos
-
 Set looping on videos by adding below code in `onBindViewHolder`:
 ```
 holder.setLooping(true); //optional - true by default
