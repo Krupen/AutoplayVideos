@@ -80,6 +80,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void playAvailableVideos(int newState) {
+        Log.d("k9k9", "playAvailableVideos: ");
 //        Log.d("trace", "playAvailableVideos: ");
         List<Thread> threads = new ArrayList<Thread>();
         if (newState == 0) {
@@ -116,7 +117,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     Thread t = new Thread() {
                                         public void run() {
                                             if (!((AAH_CustomViewHolder) holder).isPaused())
-                                            ((AAH_CustomViewHolder) holder).playVideo();
+                                                ((AAH_CustomViewHolder) holder).playVideo();
                                         }
                                     };
                                     t.start();
@@ -233,13 +234,17 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     public void onDraw(Canvas c) {
         super.onDraw(c);
         if (!initilized) {
-            initilized = true;
             //to start initially
-            playAvailableVideos(0);
+            try {
+                playAvailableVideos(0);
+                initilized = true;
+            } catch (Exception e) {
+
+            }
         }
     }
 
-    public void stopVideos(){
+    public void stopVideos() {
         for (int i = 0; i < getChildCount(); i++) {
             if (findViewHolderForAdapterPosition(i) instanceof AAH_CustomViewHolder) {
                 final AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) findViewHolderForAdapterPosition(i);
