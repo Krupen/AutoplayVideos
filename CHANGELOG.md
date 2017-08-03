@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+Version 0.1.4 *(2017-08-03)*
+----------------------------
+
+ * `onDraw` crash fix.
+ * Restart videos on app minimize/maximize.
+ * `HandlerThread` instead of `Thread` to run it in background.
+ * Video pause/unpause bug fix.
+
 Version 0.1.2 *(2017-07-06)*
 ----------------------------
 
