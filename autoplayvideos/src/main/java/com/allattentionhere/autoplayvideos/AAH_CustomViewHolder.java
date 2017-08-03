@@ -28,11 +28,15 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void playVideo() {
+        this.aah_vi.getCustomVideoView().setPaused(false);
         this.aah_vi.getCustomVideoView().startVideo();
     }
 
     public void videoStarted() {
         this.aah_vi.getImageView().setVisibility(View.GONE);
+    }
+    public void showThumb() {
+        this.aah_vi.getImageView().setVisibility(View.VISIBLE);
     }
 
     public void initVideoView(String url, Activity _act) {
@@ -48,6 +52,14 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
                 return null;
             }
         });
+
+        this.aah_vi.getCustomVideoView().setShowThumb(new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                showThumb();
+                return null;
+            }
+        });
     }
 
     public void setLooping(boolean looping) {
@@ -56,6 +68,7 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
 
     public void pauseVideo() {
         this.aah_vi.getCustomVideoView().pauseVideo();
+        this.aah_vi.getCustomVideoView().setPaused(true);
     }
 
     public void muteVideo() {

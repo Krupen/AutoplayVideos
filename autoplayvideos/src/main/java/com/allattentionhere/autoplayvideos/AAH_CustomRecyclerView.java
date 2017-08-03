@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Environment;
+import android.os.HandlerThread;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -80,8 +81,9 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void playAvailableVideos(int newState) {
+        Log.d("k9k9", "playAvailableVideos: ");
 //        Log.d("trace", "playAvailableVideos: ");
-        List<Thread> threads = new ArrayList<Thread>();
+        List<HandlerThread> threads = new ArrayList<HandlerThread>();
         if (newState == 0) {
             int firstVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
             int lastVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
@@ -113,10 +115,10 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     if (downloadVideos) {
                                         startDownloadInBackground(cvh.getVideoUrl());
                                     }
-                                    Thread t = new Thread() {
+                                    HandlerThread t = new HandlerThread("") {
                                         public void run() {
                                             if (!((AAH_CustomViewHolder) holder).isPaused())
-                                            ((AAH_CustomViewHolder) holder).playVideo();
+                                                ((AAH_CustomViewHolder) holder).playVideo();
                                         }
                                     };
                                     t.start();
@@ -150,7 +152,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     if (downloadVideos) {
                                         startDownloadInBackground(cvh.getVideoUrl());
                                     }
-                                    Thread t = new Thread() {
+                                    HandlerThread t = new HandlerThread("") {
                                         public void run() {
                                             if (!((AAH_CustomViewHolder) holder).isPaused())
                                                 ((AAH_CustomViewHolder) holder).playVideo();
@@ -170,10 +172,9 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                 }
             }
         } else if (threads.size() > 0) {
-            for (Thread t : threads) {
+            for (HandlerThread t : threads) {
+                t.quit();
                 t.interrupt();
-                t.stop();
-                t.destroy();
             }
             threads.clear();
         }
@@ -233,13 +234,17 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     public void onDraw(Canvas c) {
         super.onDraw(c);
         if (!initilized) {
-            initilized = true;
             //to start initially
-            playAvailableVideos(0);
+            try {
+                playAvailableVideos(0);
+                initilized = true;
+            } catch (Exception e) {
+
+            }
         }
     }
 
-    public void stopVideos(){
+    public void stopVideos() {
         for (int i = 0; i < getChildCount(); i++) {
             if (findViewHolderForAdapterPosition(i) instanceof AAH_CustomViewHolder) {
                 final AAH_CustomViewHolder cvh = (AAH_CustomViewHolder) findViewHolderForAdapterPosition(i);

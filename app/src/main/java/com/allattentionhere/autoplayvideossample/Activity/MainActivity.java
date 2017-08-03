@@ -107,4 +107,10 @@ public class MainActivity extends AppCompatActivity {
         //add this code to pause videos (when app is minimised or paused)
         recyclerView.stopVideos();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerView.playAvailableVideos(0);
+    }
 }
