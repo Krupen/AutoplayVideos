@@ -43,7 +43,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.1.3'
+	 compile 'com.allattentionhere:autoplayvideos:0.1.4'
 }
 ```
 
@@ -53,7 +53,7 @@ dependencies {
 <dependency>
   <groupId>com.allattentionhere</groupId>
   <artifactId>autoplayvideos</artifactId>
-  <version>0.1.3</version>
+  <version>0.1.4</version>
   <type>pom</type>
 </dependency>
 ```
@@ -224,10 +224,20 @@ recyclerView.setCheckForMp4(false); // true by default
 ### Pause videos manually (Optional)
 Call the following method to stop the videos when Activity/Fragment stops (User receives call, minimizes app etc)
 ```
-@Override
+    @Override
     protected void onStop() {
         super.onStop();
         recyclerView.stopVideos();
+    }
+```
+
+### Resume videos when app resumes (Optional)
+Call the following method to resume videos when App resumes (opening app after minimizing it, etc)
+```
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerView.playAvailableVideos(0);
     }
 ```
 
