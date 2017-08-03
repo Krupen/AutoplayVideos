@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Environment;
+import android.os.HandlerThread;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -82,7 +83,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     public void playAvailableVideos(int newState) {
         Log.d("k9k9", "playAvailableVideos: ");
 //        Log.d("trace", "playAvailableVideos: ");
-        List<Thread> threads = new ArrayList<Thread>();
+        List<HandlerThread> threads = new ArrayList<HandlerThread>();
         if (newState == 0) {
             int firstVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
             int lastVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
@@ -114,7 +115,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     if (downloadVideos) {
                                         startDownloadInBackground(cvh.getVideoUrl());
                                     }
-                                    Thread t = new Thread() {
+                                    HandlerThread t = new HandlerThread("") {
                                         public void run() {
                                             if (!((AAH_CustomViewHolder) holder).isPaused())
                                                 ((AAH_CustomViewHolder) holder).playVideo();
@@ -151,7 +152,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     if (downloadVideos) {
                                         startDownloadInBackground(cvh.getVideoUrl());
                                     }
-                                    Thread t = new Thread() {
+                                    HandlerThread t = new HandlerThread("") {
                                         public void run() {
                                             if (!((AAH_CustomViewHolder) holder).isPaused())
                                                 ((AAH_CustomViewHolder) holder).playVideo();
@@ -171,10 +172,9 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                 }
             }
         } else if (threads.size() > 0) {
-            for (Thread t : threads) {
+            for (HandlerThread t : threads) {
+                t.quit();
                 t.interrupt();
-                t.stop();
-                t.destroy();
             }
             threads.clear();
         }
