@@ -186,6 +186,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                handler.removeCallbacksAndMessages(t);
             }
             runnables.clear();
+            handlerThread.quit();
         }
     }
 

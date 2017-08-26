@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setActivity(this);
 
         //optional - to play only first visible video
-//        recyclerView.setPlayOnlyFirstVideo(true); // false by default
+        recyclerView.setPlayOnlyFirstVideo(true); // false by default
 
         //optional - by default we check if url ends with ".mp4". If your urls do not end with mp4, you can set this param to false and implement your own check to see if video points to url
         recyclerView.setCheckForMp4(false); //true by default
