@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.1.5 *(2017-09-05)*
+----------------------------
+
+ * Single HandlerThread with multiple runnables instead of multiple HandlerThreads.
+ * Check internet connection before playing or downloading videos (Requires ACCESS_NETWORK_STATE permission).
+ 
 Version 0.1.4 *(2017-08-03)*
 ----------------------------
 
