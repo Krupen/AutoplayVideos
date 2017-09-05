@@ -72,6 +72,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
             @Override
             public void onScrollStateChanged(final RecyclerView recyclerView, final int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+
                 playAvailableVideos(newState);
             }
 
@@ -83,7 +84,8 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void playAvailableVideos(int newState) {
-        Log.d("k9k9", "playAvailableVideos: ");
+//        Log.d("k9k9", "playAvailableVideos isConnected: "+AAH_Utils.isConnected(_act));
+        if(!AAH_Utils.isConnected(_act)) return;
 //        Log.d("trace", "playAvailableVideos: ");
         HandlerThread handlerThread = new HandlerThread("DONT_GIVE_UP");
         handlerThread.start();
@@ -221,6 +223,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void preDownload(List<String> urls) {
+        if(!AAH_Utils.isConnected(_act)) return;
         HashSet<String> hashSet = new HashSet<String>();
         hashSet.addAll(urls);
         urls.clear();
