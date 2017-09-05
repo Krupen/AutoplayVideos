@@ -53,7 +53,7 @@ dependencies {
 <dependency>
   <groupId>com.allattentionhere</groupId>
   <artifactId>autoplayvideos</artifactId>
-  <version>0.1.4</version>
+  <version>0.1.5</version>
   <type>pom</type>
 </dependency>
 ```
