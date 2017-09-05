@@ -43,7 +43,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.1.4'
+	 compile 'com.allattentionhere:autoplayvideos:0.1.5'
 }
 ```
 
@@ -56,6 +56,14 @@ dependencies {
   <version>0.1.4</version>
   <type>pom</type>
 </dependency>
+```
+
+# Permissions
+
+Add below permissions to `AndroidManifest.xml`
+```
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
 
 # Usage
@@ -211,7 +219,10 @@ List<String> urls = new ArrayList<>();
  }
 recyclerView.preDownload(urls);
 ```
-Note: Do not forget to add WRITE_EXTERNAL_STORAGE permission in the Manifest file and also ask for runtime permission in devices above Marshmallow.
+Add below permission to `AndroidManifest.xml`. Ask for runtime permission in devices on Marshmallow and above.
+```
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
 
 
 ### Remove check for .mp4 (Optional)
