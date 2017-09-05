@@ -3,6 +3,7 @@
     package="com.allattentionhere.autoplayvideossample">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!--OPTIONAL for storing in local storage-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

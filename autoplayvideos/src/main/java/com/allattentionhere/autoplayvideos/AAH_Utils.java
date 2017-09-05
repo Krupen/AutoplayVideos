@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -42,6 +44,11 @@ public class AAH_Utils {
     public static boolean isVideoDownloaded(Context c, String url) {
         return getString(c, url) != null;
 
+    }
+
+    public static boolean isConnected(Context c) {
+        NetworkInfo info = ((ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        return info != null && info.isConnected();
     }
 
 }

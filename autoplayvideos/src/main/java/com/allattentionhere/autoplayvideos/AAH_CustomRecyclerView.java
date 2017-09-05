@@ -7,7 +7,9 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -70,6 +72,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
             @Override
             public void onScrollStateChanged(final RecyclerView recyclerView, final int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+
                 playAvailableVideos(newState);
             }
 
@@ -81,9 +84,16 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void playAvailableVideos(int newState) {
-        Log.d("k9k9", "playAvailableVideos: ");
+//        Log.d("k9k9", "playAvailableVideos isConnected: "+AAH_Utils.isConnected(_act));
+        if(!AAH_Utils.isConnected(_act)) return;
 //        Log.d("trace", "playAvailableVideos: ");
-        List<HandlerThread> threads = new ArrayList<HandlerThread>();
+        HandlerThread handlerThread = new HandlerThread("DONT_GIVE_UP");
+        handlerThread.start();
+        Looper looper = handlerThread.getLooper();
+        Handler handler = new Handler(looper);
+        List<Runnable> runnables = new ArrayList<>();
+
+//        List<HandlerThread> threads = new ArrayList<HandlerThread>();
         if (newState == 0) {
             int firstVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
             int lastVisiblePosition = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
@@ -115,14 +125,15 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     if (downloadVideos) {
                                         startDownloadInBackground(cvh.getVideoUrl());
                                     }
-                                    HandlerThread t = new HandlerThread("") {
+                                    Runnable myRunnable = new Runnable() {
+                                        @Override
                                         public void run() {
                                             if (!((AAH_CustomViewHolder) holder).isPaused())
                                                 ((AAH_CustomViewHolder) holder).playVideo();
                                         }
                                     };
-                                    t.start();
-                                    threads.add(t);
+                                    handler.post(myRunnable);
+                                    runnables.add(myRunnable);
                                 } else {
 //                                    Log.d("trace", i + " not foundFirstVideo: ");
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
@@ -152,14 +163,15 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                     if (downloadVideos) {
                                         startDownloadInBackground(cvh.getVideoUrl());
                                     }
-                                    HandlerThread t = new HandlerThread("") {
+                                    Runnable myRunnable = new Runnable() {
+                                        @Override
                                         public void run() {
                                             if (!((AAH_CustomViewHolder) holder).isPaused())
                                                 ((AAH_CustomViewHolder) holder).playVideo();
                                         }
                                     };
-                                    t.start();
-                                    threads.add(t);
+                                    handler.post(myRunnable);
+                                    runnables.add(myRunnable);
                                 } else {
                                     ((AAH_CustomViewHolder) holder).pauseVideo();
                                 }
@@ -171,12 +183,12 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                     }
                 }
             }
-        } else if (threads.size() > 0) {
-            for (HandlerThread t : threads) {
-                t.quit();
-                t.interrupt();
+        } else if (runnables.size() > 0) {
+            for (Runnable t : runnables) {
+               handler.removeCallbacksAndMessages(t);
             }
-            threads.clear();
+            runnables.clear();
+            handlerThread.quit();
         }
     }
 
@@ -211,6 +223,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void preDownload(List<String> urls) {
+        if(!AAH_Utils.isConnected(_act)) return;
         HashSet<String> hashSet = new HashSet<String>();
         hashSet.addAll(urls);
         urls.clear();
