@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.1.6 *(2017-10-08)*
+----------------------------
+
+ * Crash fix for SetDataUri().
+ * UI Freeze issue fix.
+ 
 Version 0.1.5 *(2017-09-05)*
 ----------------------------
 
