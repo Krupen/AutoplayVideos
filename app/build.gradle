@@ -31,5 +31,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.danikula:videocache:2.7.0'
     compile project(':autoplayvideos')
 }

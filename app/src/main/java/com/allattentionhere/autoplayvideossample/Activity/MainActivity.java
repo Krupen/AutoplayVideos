@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Picasso p = Picasso.with(this);
+        modelList.add(new MyModel("http://techslides.com/demos/sample-videos/small.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_150,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name1"));
 //        modelList.add(new MyModel("http://www.betcoingaming.com/webdesigns/animatedslider/images/liveroulette2.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_150,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","name1"));
         modelList.add(new MyModel("https://firebasestorage.googleapis.com/v0/b/flickering-heat-5334.appspot.com/o/demo1.mp4?alt=media&token=f6d82bb0-f61f-45bc-ab13-16970c7432c4", "http://res.cloudinary.com/krupen/video/upload/w_300,h_150,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg", "video1"));
         modelList.add(new MyModel("http://res.cloudinary.com/krupen/video/upload/w_300,h_150,c_crop,q_70/v1491561340/hello_cuwgcb.mp4", "http://res.cloudinary.com/krupen/video/upload/w_300,h_150,c_crop,q_70,so_0/v1491561340/hello_cuwgcb.jpg", "video2"));
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         //optional - download videos to local storage (requires "android.permission.WRITE_EXTERNAL_STORAGE" in manifest or ask in runtime)
         recyclerView.setDownloadPath(Environment.getExternalStorageDirectory() + "/MyVideo"); // (Environment.getExternalStorageDirectory() + "/Video") by default
 
-        recyclerView.setDownloadVideos(true); // false by default
+//        recyclerView.setDownloadVideos(true); // false by default
 
         //extra - start downloading all videos in background before loading RecyclerView
         List<String> urls = new ArrayList<>();
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             if (object.getVideo_url() != null && object.getVideo_url().contains("http"))
                 urls.add(object.getVideo_url());
         }
-        recyclerView.preDownload(urls);
+//        recyclerView.preDownload(urls);
 
         recyclerView.setAdapter(mAdapter);
         //call this functions when u want to start autoplay on loading async lists (eg firebase)

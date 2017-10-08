@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.allattentionhere.autoplayvideossample.Model.MyModel;
+import com.allattentionhere.autoplayvideossample.MyApplication;
 import com.allattentionhere.autoplayvideossample.R;
 import com.allattentionhere.autoplayvideos.AAH_CustomViewHolder;
 import com.allattentionhere.autoplayvideos.AAH_VideosAdapter;
@@ -73,7 +74,7 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
 
         //todo
         holder.setImageUrl(list.get(position).getImage_url());
-        holder.setVideoUrl(list.get(position).getVideo_url());
+        holder.setVideoUrl(MyApplication.getProxy().getProxyUrl(list.get(position).getVideo_url()+"")); // url should not be null
 
         //load image into imageview
         if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty()) {
