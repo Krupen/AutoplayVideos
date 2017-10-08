@@ -6,6 +6,9 @@ import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Surface;
@@ -59,8 +62,8 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
     }
 
     public void startVideo() {
-        Log.d("k9k9", "startVideo: ");
-        if (!isPaused) {
+//        Log.d("k9k9", "startVideo: ");
+        if (!isPaused && _act!=null && !_act.isFinishing() && mSource!=null && !mSource.toString().isEmpty()) {
             setSurfaceTextureListener(this);
             if (this.getSurfaceTexture() != null) {
                 if (mMediaPlayer != null) {
@@ -117,8 +120,9 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 //                  mMediaPlayer.setOnCompletionListener(mCompletionListener);
 //                  mMediaPlayer.setOnBufferingUpdateListener(this);
 //                  mMediaPlayer.setOnErrorListener(this);
+//                        Log.d("k9looper", "isMainThread prepare on start: "+(Looper.myLooper() == Looper.getMainLooper()));
                         mMediaPlayer.setLooping(isLooping);
-                        mMediaPlayer.setDataSource(getContext(), mSource);
+                        mMediaPlayer.setDataSource(_act, mSource);
                         mMediaPlayer.setSurface(surface);
                         mMediaPlayer.prepare();
                         if (mMediaPlayer != null) mMediaPlayer.start();
@@ -162,8 +166,8 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
-        Log.d("k9k9", "onSurfaceTextureAvailable: ");
-        if (!isPaused) {
+//        Log.d("k9k9", "onSurfaceTextureAvailable: ");
+        if (!isPaused && _act!=null && !_act.isFinishing() && mSource!=null && !mSource.toString().isEmpty()) {
             if (mMediaPlayer != null) {
                 mMediaPlayer.start();
                 try {
@@ -172,7 +176,7 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
                     e.printStackTrace();
                 }
             } else {
-                Surface surface = new Surface(surfaceTexture);
+                final Surface surface = new Surface(surfaceTexture);
                 try {
                     mMediaPlayer = new MediaPlayer();
                     if (myFuncIn != null) {
@@ -220,19 +224,33 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 //            mMediaPlayer.setOnCompletionListener(mCompletionListener);
 //            mMediaPlayer.setOnBufferingUpdateListener(this);
 //            mMediaPlayer.setOnErrorListener(this);
-                    mMediaPlayer.setLooping(isLooping);
-                    mMediaPlayer.setDataSource(getContext(), mSource);
-                    mMediaPlayer.setSurface(surface);
-                    mMediaPlayer.prepare();
-                    mMediaPlayer.start();
+                    final HandlerThread handlerThread = new HandlerThread("DONT_GIVE_UP2",android.os.Process.THREAD_PRIORITY_BACKGROUND+ android.os.Process.THREAD_PRIORITY_MORE_FAVORABLE);
+                    handlerThread.start();
+                    Looper looper = handlerThread.getLooper();
+                    Handler handler = new Handler(looper);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+//                            Log.d("k9looper", "isMainThread prepare on Avail: "+(Looper.myLooper() == Looper.getMainLooper()));
+                            try {
+                                mMediaPlayer.setLooping(isLooping);
+                                mMediaPlayer.setDataSource(_act, mSource);
+                                mMediaPlayer.setSurface(surface);
+                                mMediaPlayer.prepare();
+                                if (mMediaPlayer != null) mMediaPlayer.start();
+                            } catch (Exception e) {
+                                Log.e("k9exception", "run: "+e.getMessage());
+                                e.printStackTrace();
+                            }finally {
+                                handlerThread.quit();
+                            }
 
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                } catch (SecurityException e) {
-                    e.printStackTrace();
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                        }
+                    });
+
+
+
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -246,7 +264,7 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 
     @Override
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-        Log.d("k9k9", "onSurfaceTextureDestroyed: ");
+//        Log.d("k9k9", "onSurfaceTextureDestroyed: ");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             //pre lollipop needs SurfaceTexture it owns before calling onDetachedFromWindow super
             surface.release();

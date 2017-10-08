@@ -87,7 +87,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
 //        Log.d("k9k9", "playAvailableVideos isConnected: "+AAH_Utils.isConnected(_act));
         if(!AAH_Utils.isConnected(_act)) return;
 //        Log.d("trace", "playAvailableVideos: ");
-        HandlerThread handlerThread = new HandlerThread("DONT_GIVE_UP");
+        HandlerThread handlerThread = new HandlerThread("DONT_GIVE_UP",android.os.Process.THREAD_PRIORITY_BACKGROUND+ android.os.Process.THREAD_PRIORITY_MORE_FAVORABLE);
         handlerThread.start();
         Looper looper = handlerThread.getLooper();
         Handler handler = new Handler(looper);
@@ -243,19 +243,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
         this.checkForMp4 = checkForMp4;
     }
 
-    @Override
-    public void onDraw(Canvas c) {
-        super.onDraw(c);
-        if (!initilized) {
-            //to start initially
-            try {
-                playAvailableVideos(0);
-                initilized = true;
-            } catch (Exception e) {
 
-            }
-        }
-    }
 
     public void stopVideos() {
         for (int i = 0; i < getChildCount(); i++) {

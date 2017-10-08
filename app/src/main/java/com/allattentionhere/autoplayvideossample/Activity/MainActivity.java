@@ -96,8 +96,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.preDownload(urls);
 
         recyclerView.setAdapter(mAdapter);
-        //call this function when u want to start autoplay on loading async lists (eg firebase)
-//        recyclerView.playAvailableVideos(0);
+        //call this functions when u want to start autoplay on loading async lists (eg firebase)
+        recyclerView.smoothScrollBy(0,1);
+        recyclerView.smoothScrollBy(0,-1);
 
     }
 
@@ -108,9 +109,5 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.stopVideos();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        recyclerView.playAvailableVideos(0);
-    }
+
 }
