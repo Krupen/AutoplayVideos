@@ -43,7 +43,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.1.5'
+	 compile 'com.allattentionhere:autoplayvideos:0.1.6'
 }
 ```
 
@@ -53,7 +53,7 @@ dependencies {
 <dependency>
   <groupId>com.allattentionhere</groupId>
   <artifactId>autoplayvideos</artifactId>
-  <version>0.1.5</version>
+  <version>0.1.6</version>
   <type>pom</type>
 </dependency>
 ```
@@ -197,6 +197,14 @@ Finally `setActivity` in your Activity before setting the adapter and (Optional)
 ```
 
 
+### Play videos initially (Optional)
+Call these two functions to start video playback when the screen launches and user hasn't scrolled.
+```
+recyclerView.smoothScrollBy(0,1);
+recyclerView.smoothScrollBy(0,-1);
+```
+
+
 ### Play only 1st video (Optional)
 Setting this parameter will play video only in 1st completely visible RecyclerView ViewHolder.
 ```
@@ -318,6 +326,39 @@ Set looping on videos by adding below code in `onBindViewHolder`:
 ```
 holder.setLooping(true); //optional - true by default
 ```
+
+
+# Cache Videos (Optional)
+
+It is recommended to `setDownloadVideos(value)` to true. However if you do not want to use this option, we recommend you to use <a href="https://github.com/danikula/AndroidVideoCache" target="_blank">AndroidVideoCache library</a>. 
+Here is how you can use it along with our library:
+
+### Initilize HttpProxyCacheServer
+Initilize `HttpProxyCacheServer` in your Application class and register Application class in your Manifest file.
+```
+public class MyApplication extends Application {
+	private static HttpProxyCacheServer proxy;
+
+	public static HttpProxyCacheServer getProxy() {
+	    return proxy;
+	}
+
+	@Override
+	public void onCreate() {
+	    super.onCreate();
+	    proxy = new HttpProxyCacheServer(this);
+	}
+}	
+```
+
+### Set proxy video URL
+In your VideosAdapter, set the Video URL as follows:
+```
+holder.setVideoUrl(MyApplication.getProxy().getProxyUrl(list.get(position).getVideo_url()+"")); // url should not be null
+```
+
+You can also use advanced options for caching that the library supports. Refer to their documentation for the same.
+
 
 # Use Cloudinary (Optional)
 
