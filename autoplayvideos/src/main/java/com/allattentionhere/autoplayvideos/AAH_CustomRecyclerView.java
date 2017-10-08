@@ -243,19 +243,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
         this.checkForMp4 = checkForMp4;
     }
 
-    @Override
-    public void onDraw(Canvas c) {
-        super.onDraw(c);
-        if (!initilized) {
-            //to start initially
-            try {
-                playAvailableVideos(0);
-                initilized = true;
-            } catch (Exception e) {
 
-            }
-        }
-    }
 
     public void stopVideos() {
         for (int i = 0; i < getChildCount(); i++) {

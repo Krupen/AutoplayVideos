@@ -238,7 +238,8 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
                                 mMediaPlayer.setSurface(surface);
                                 mMediaPlayer.prepare();
                                 if (mMediaPlayer != null) mMediaPlayer.start();
-                            } catch (IOException e) {
+                            } catch (Exception e) {
+                                Log.e("k9exception", "run: "+e.getMessage());
                                 e.printStackTrace();
                             }finally {
                                 handlerThread.quit();
