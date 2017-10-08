@@ -60,7 +60,7 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 
     public void startVideo() {
         Log.d("k9k9", "startVideo: ");
-        if (!isPaused) {
+        if (!isPaused && _act!=null && !_act.isFinishing() && mSource!=null && !mSource.toString().isEmpty()) {
             setSurfaceTextureListener(this);
             if (this.getSurfaceTexture() != null) {
                 if (mMediaPlayer != null) {
@@ -118,7 +118,7 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 //                  mMediaPlayer.setOnBufferingUpdateListener(this);
 //                  mMediaPlayer.setOnErrorListener(this);
                         mMediaPlayer.setLooping(isLooping);
-                        mMediaPlayer.setDataSource(getContext(), mSource);
+                        mMediaPlayer.setDataSource(_act, mSource);
                         mMediaPlayer.setSurface(surface);
                         mMediaPlayer.prepare();
                         if (mMediaPlayer != null) mMediaPlayer.start();
@@ -163,7 +163,7 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
         Log.d("k9k9", "onSurfaceTextureAvailable: ");
-        if (!isPaused) {
+        if (!isPaused && _act!=null && !_act.isFinishing() && mSource!=null && !mSource.toString().isEmpty()) {
             if (mMediaPlayer != null) {
                 mMediaPlayer.start();
                 try {
@@ -221,7 +221,7 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
 //            mMediaPlayer.setOnBufferingUpdateListener(this);
 //            mMediaPlayer.setOnErrorListener(this);
                     mMediaPlayer.setLooping(isLooping);
-                    mMediaPlayer.setDataSource(getContext(), mSource);
+                    mMediaPlayer.setDataSource(_act, mSource);
                     mMediaPlayer.setSurface(surface);
                     mMediaPlayer.prepare();
                     mMediaPlayer.start();
