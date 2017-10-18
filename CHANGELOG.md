@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 0.1.7 *(2017-10-18)*
+----------------------------
+
+ * Added getter for various variables for advanced usage.
+ 
 Version 0.1.6 *(2017-10-08)*
 ----------------------------
 
