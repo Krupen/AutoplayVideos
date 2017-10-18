@@ -120,4 +120,8 @@ public class AAH_CustomViewHolder extends RecyclerView.ViewHolder {
     public boolean isPaused() {
         return isPaused;
     }
+
+    public boolean isLooping() {
+        return isLooping;
+    }
 }

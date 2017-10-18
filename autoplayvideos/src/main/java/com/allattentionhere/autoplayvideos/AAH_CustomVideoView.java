@@ -326,4 +326,19 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
             mMediaPlayer.setVolume(1f, 1f);
     }
 
+    public MediaPlayer getMediaPlayer() {
+        return mMediaPlayer;
+    }
+
+    public Uri getSource() {
+        return mSource;
+    }
+
+    public boolean isLooping() {
+        return isLooping;
+    }
+
+    public boolean isPaused() {
+        return isPaused;
+    }
 }
