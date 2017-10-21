@@ -85,7 +85,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
 
     public void playAvailableVideos(int newState) {
 //        Log.d("k9k9", "playAvailableVideos isConnected: "+AAH_Utils.isConnected(_act));
-        if(!AAH_Utils.isConnected(_act)) return;
+
 //        Log.d("trace", "playAvailableVideos: ");
         HandlerThread handlerThread = new HandlerThread("DONT_GIVE_UP",android.os.Process.THREAD_PRIORITY_BACKGROUND+ android.os.Process.THREAD_PRIORITY_MORE_FAVORABLE);
         handlerThread.start();
@@ -203,6 +203,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void startDownloadInBackground(String url) {
+        if(!AAH_Utils.isConnected(_act)) return;
         /* Starting Download Service */
         if ((AAH_Utils.getString(_act, url) == null || !(new File(getString(_act, url)).exists())) && url != null && !url.equalsIgnoreCase("null")) {
             Intent intent = new Intent(Intent.ACTION_SYNC, null, _act, AAH_DownloadService.class);

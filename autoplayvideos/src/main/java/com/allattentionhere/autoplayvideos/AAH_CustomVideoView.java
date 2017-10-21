@@ -156,7 +156,7 @@ public class AAH_CustomVideoView extends TextureView implements TextureView.Surf
             mMediaPlayer = null;
         }
         try {
-            showThumb.call();
+            if (showThumb!=null) showThumb.call();
         } catch (Exception e) {
             e.printStackTrace();
         }
