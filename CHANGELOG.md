@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 0.1.8 *(2017-10-21)*
+----------------------------
+
+ * Support to play videos offline from local storage.
+ 
 Version 0.1.7 *(2017-10-18)*
 ----------------------------
 
