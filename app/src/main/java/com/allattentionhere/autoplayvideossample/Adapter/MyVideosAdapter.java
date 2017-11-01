@@ -1,6 +1,7 @@
 package com.allattentionhere.autoplayvideossample.Adapter;
 
 import android.graphics.Bitmap;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,17 +19,22 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
+import static com.allattentionhere.autoplayvideossample.R.id.img_playback;
+import static com.allattentionhere.autoplayvideossample.R.id.img_vol;
+
 
 public class MyVideosAdapter extends AAH_VideosAdapter {
 
     private final List<MyModel> list;
     private final Picasso picasso;
+    private static final int TYPE_VIDEO=0,TYPE_TEXT=1;
 
     public class MyViewHolder extends AAH_CustomViewHolder {
         final TextView tv;
         final ImageView img_vol, img_playback;
         //to mute/un-mute video (optional)
         boolean isMuted;
+
         public MyViewHolder(View x) {
             super(x);
             tv = ButterKnife.findById(x, R.id.tv);
@@ -49,74 +55,100 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
                 img_vol.setImageResource(R.drawable.ic_unmute);
             }
         }
+
         @Override
         public void pauseVideo() {
             super.pauseVideo();
             img_playback.setImageResource(R.drawable.ic_play);
         }
     }
+
+    public class MyTextViewHolder extends RecyclerView.ViewHolder {
+        final TextView tv;
+
+        public MyTextViewHolder(View x) {
+            super(x);
+            tv = ButterKnife.findById(x, R.id.tv);
+        }
+
+    }
+
     public MyVideosAdapter(List<MyModel> list_urls, Picasso p) {
         this.list = list_urls;
         this.picasso = p;
     }
 
     @Override
-    public AAH_CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_card, parent, false);
-        return new MyViewHolder(itemView);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType==TYPE_VIDEO){
+            View itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.single_card, parent, false);
+            return new MyViewHolder(itemView);
+        }else {
+            View itemView1 = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.single_text, parent, false);
+            return new MyTextViewHolder(itemView1);
+        }
     }
 
     @Override
-    public void onBindViewHolder(final AAH_CustomViewHolder holder, int position) {
-        ((MyViewHolder) holder).tv.setText(list.get(position).getName());
+    public void onBindViewHolder(final RecyclerView.ViewHolder mholder, int position) {
+        if (mholder instanceof MyViewHolder) {
+            final AAH_CustomViewHolder holder = (AAH_CustomViewHolder) mholder;
+            ((MyViewHolder) holder).tv.setText(list.get(position).getName());
 
-        //todo
-        holder.setImageUrl(list.get(position).getImage_url());
-        holder.setVideoUrl(list.get(position).getVideo_url());
+            //todo
+            holder.setImageUrl(list.get(position).getImage_url());
+            holder.setVideoUrl(list.get(position).getVideo_url());
 
-        //load image into imageview
-        if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty()) {
-            picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
-        }
-
-        holder.setLooping(true); //optional - true by default
-
-        //to play pause videos manually (optional)
-        ((MyViewHolder) holder).img_playback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.isPlaying()) {
-                    holder.pauseVideo();
-                    holder.setPaused(true);
-                } else {
-                    holder.playVideo();
-                    holder.setPaused(false);
-                }
+            //load image into imageview
+            if (list.get(position).getImage_url() != null && !list.get(position).getImage_url().isEmpty()) {
+                picasso.load(holder.getImageUrl()).config(Bitmap.Config.RGB_565).into(holder.getAAH_ImageView());
             }
-        });
 
-        //to mute/un-mute video (optional)
-        ((MyViewHolder) holder).img_vol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((MyViewHolder) holder).isMuted) {
-                    holder.unmuteVideo();
-                    ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_unmute);
-                } else {
-                    holder.muteVideo();
-                    ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_mute);
+            holder.setLooping(true); //optional - true by default
+
+            //to play pause videos manually (optional)
+            ((MyViewHolder) holder).img_playback.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.isPlaying()) {
+                        holder.pauseVideo();
+                        holder.setPaused(true);
+                    } else {
+                        holder.playVideo();
+                        holder.setPaused(false);
+                    }
                 }
-                ((MyViewHolder) holder).isMuted = !((MyViewHolder) holder).isMuted;
-            }
-        });
+            });
 
-        if (list.get(position).getVideo_url() == null) {
-            ((MyViewHolder) holder).img_vol.setVisibility(View.GONE);
-            ((MyViewHolder) holder).img_playback.setVisibility(View.GONE);
+            //to mute/un-mute video (optional)
+            ((MyViewHolder) holder).img_vol.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (((MyViewHolder) holder).isMuted) {
+                        holder.unmuteVideo();
+                        ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_unmute);
+                    } else {
+                        holder.muteVideo();
+                        ((MyViewHolder) holder).img_vol.setImageResource(R.drawable.ic_mute);
+                    }
+                    ((MyViewHolder) holder).isMuted = !((MyViewHolder) holder).isMuted;
+                }
+            });
+
+            if (list.get(position).getVideo_url() == null) {
+                ((MyViewHolder) holder).img_vol.setVisibility(View.GONE);
+                ((MyViewHolder) holder).img_playback.setVisibility(View.GONE);
+            } else {
+                ((MyViewHolder) holder).img_vol.setVisibility(View.VISIBLE);
+                ((MyViewHolder) holder).img_playback.setVisibility(View.VISIBLE);
+            }
         } else {
-            ((MyViewHolder) holder).img_vol.setVisibility(View.VISIBLE);
-            ((MyViewHolder) holder).img_playback.setVisibility(View.VISIBLE);
+            final MyTextViewHolder holder = (MyTextViewHolder) mholder;
+            ((MyTextViewHolder) holder).tv.setText(list.get(position).getName());
+
+
         }
     }
 
@@ -129,7 +161,7 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        return 0;
+        return position % 2;
     }
 
 

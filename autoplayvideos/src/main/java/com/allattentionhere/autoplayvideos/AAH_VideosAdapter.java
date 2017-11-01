@@ -6,36 +6,42 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class AAH_VideosAdapter extends RecyclerView.Adapter<AAH_CustomViewHolder> {
+public class AAH_VideosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public AAH_VideosAdapter() {
     }
 
     @Override
-    public AAH_CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new AAH_CustomViewHolder(new View(parent.getContext()));
     }
 
     @Override
-    public void onBindViewHolder(AAH_CustomViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     }
 
     @Override
-    public void onViewDetachedFromWindow(final AAH_CustomViewHolder holder) {
-        if (holder != null) {
-            holder.getAah_vi().getCustomVideoView().clearAll();
-            holder.getAah_vi().getCustomVideoView().invalidate();
+    public void onViewDetachedFromWindow(final RecyclerView.ViewHolder mholder) {
+        if (mholder instanceof AAH_CustomViewHolder) {
+            AAH_CustomViewHolder holder = (AAH_CustomViewHolder) mholder;
+            if (holder != null) {
+                holder.getAah_vi().getCustomVideoView().clearAll();
+                holder.getAah_vi().getCustomVideoView().invalidate();
+            }
         }
-        super.onViewDetachedFromWindow(holder);
+        super.onViewDetachedFromWindow(mholder);
     }
 
     @Override
-    public void onViewRecycled(AAH_CustomViewHolder holder) {
-        if (holder != null) {
-            holder.getAah_vi().getCustomVideoView().clearAll();
-            holder.getAah_vi().getCustomVideoView().invalidate();
+    public void onViewRecycled(RecyclerView.ViewHolder mholder) {
+        if (mholder instanceof AAH_CustomViewHolder) {
+            AAH_CustomViewHolder holder = (AAH_CustomViewHolder) mholder;
+            if (holder != null) {
+                holder.getAah_vi().getCustomVideoView().clearAll();
+                holder.getAah_vi().getCustomVideoView().invalidate();
+            }
         }
-        super.onViewRecycled(holder);
+        super.onViewRecycled(mholder);
     }
 
     @Override
@@ -47,7 +53,6 @@ public class AAH_VideosAdapter extends RecyclerView.Adapter<AAH_CustomViewHolder
     public int getItemViewType(int position) {
         return 0;
     }
-
 
 
 }
