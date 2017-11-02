@@ -22,7 +22,7 @@ public class AAH_VideosAdapter extends RecyclerView.Adapter<AAH_CustomViewHolder
 
     @Override
     public void onViewDetachedFromWindow(final AAH_CustomViewHolder holder) {
-        if (holder != null) {
+        if (holder != null && holder.getAah_vi()!=null) {
             holder.getAah_vi().getCustomVideoView().clearAll();
             holder.getAah_vi().getCustomVideoView().invalidate();
         }
@@ -31,7 +31,7 @@ public class AAH_VideosAdapter extends RecyclerView.Adapter<AAH_CustomViewHolder
 
     @Override
     public void onViewRecycled(AAH_CustomViewHolder holder) {
-        if (holder != null) {
+        if (holder != null && holder.getAah_vi()!=null) {
             holder.getAah_vi().getCustomVideoView().clearAll();
             holder.getAah_vi().getCustomVideoView().invalidate();
         }
