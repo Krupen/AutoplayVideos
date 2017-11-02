@@ -43,7 +43,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.1.7'
+	 compile 'com.allattentionhere:autoplayvideos:0.1.8'
 }
 ```
 
@@ -53,7 +53,7 @@ dependencies {
 <dependency>
   <groupId>com.allattentionhere</groupId>
   <artifactId>autoplayvideos</artifactId>
-  <version>0.1.7</version>
+  <version>0.1.8</version>
   <type>pom</type>
 </dependency>
 ```
