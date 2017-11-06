@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         //you can pass local file uri, but make sure it exists
 //        modelList.add(new MyModel("/storage/emulated/0/VideoPlay/myvideo.mp4","http://res.cloudinary.com/krupen/video/upload/w_300,h_150,c_crop,q_70,so_0/v1481795681/2_rp0zyy.jpg","video18"));
 
-        MyVideosAdapter mAdapter = new MyVideosAdapter(modelList, p);
+        MyVideosAdapter mAdapter = new MyVideosAdapter(modelList, p,this);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(mLayoutManager);

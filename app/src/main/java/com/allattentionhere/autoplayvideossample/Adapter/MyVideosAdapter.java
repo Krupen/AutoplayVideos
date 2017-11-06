@@ -1,5 +1,7 @@
 package com.allattentionhere.autoplayvideossample.Adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.allattentionhere.autoplayvideossample.Activity.TempActivity;
 import com.allattentionhere.autoplayvideossample.Model.MyModel;
 import com.allattentionhere.autoplayvideossample.R;
 import com.allattentionhere.autoplayvideos.AAH_CustomViewHolder;
@@ -27,6 +30,7 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     private final List<MyModel> list;
     private final Picasso picasso;
     private static final int TYPE_VIDEO = 0, TYPE_TEXT = 1;
+    private Activity a;
 
     public class MyViewHolder extends AAH_CustomViewHolder {
         final TextView tv;
@@ -72,9 +76,10 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
         }
     }
 
-    public MyVideosAdapter(List<MyModel> list_urls, Picasso p) {
+    public MyVideosAdapter(List<MyModel> list_urls, Picasso p,Activity aa) {
         this.list = list_urls;
         this.picasso = p;
+        a=aa;
     }
 
     @Override
@@ -95,6 +100,13 @@ public class MyVideosAdapter extends AAH_VideosAdapter {
     public void onBindViewHolder(final AAH_CustomViewHolder holder, int position) {
         if (list.get(position).getName().startsWith("text")) {
             ((MyTextViewHolder) holder).tv.setText(list.get(position).getName());
+            ((MyTextViewHolder) holder).tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(a, TempActivity.class);
+                    a.startActivity(i);
+                }
+            });
         } else {
             ((MyViewHolder) holder).tv.setText(list.get(position).getName());
 
