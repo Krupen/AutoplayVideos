@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 0.2.0 *(2017-11-13)*
+----------------------------
+
+ * Added Support to specify percentage of view that needs to be visible for video to start playing.
+ 
 Version 0.1.9 *(2017-11-02)*
 ----------------------------
 
