@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import static android.R.attr.right;
 import static com.allattentionhere.autoplayvideos.AAH_Utils.getString;
 
 /**
@@ -38,6 +39,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     private boolean playOnlyFirstVideo = false;
     private boolean downloadVideos = false;
     private boolean checkForMp4 = true;
+    private float visiblePercent = 100.0f;
     private String downloadPath = Environment.getExternalStorageDirectory() + "/Video";
     boolean initilized = false;
 
@@ -87,7 +89,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
 //        Log.d("k9k9", "playAvailableVideos isConnected: "+AAH_Utils.isConnected(_act));
 
 //        Log.d("trace", "playAvailableVideos: ");
-        HandlerThread handlerThread = new HandlerThread("DONT_GIVE_UP",android.os.Process.THREAD_PRIORITY_BACKGROUND+ android.os.Process.THREAD_PRIORITY_MORE_FAVORABLE);
+        HandlerThread handlerThread = new HandlerThread("DONT_GIVE_UP", android.os.Process.THREAD_PRIORITY_BACKGROUND + android.os.Process.THREAD_PRIORITY_MORE_FAVORABLE);
         handlerThread.start();
         Looper looper = handlerThread.getLooper();
         Handler handler = new Handler(looper);
@@ -114,7 +116,12 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                 Rect rect_child = new Rect(location[0], location[1], location[0] + cvh.getAah_vi().getWidth(), location[1] + cvh.getAah_vi().getHeight());
 //                                        Log.d("k9pos", "x: " + location[0] + " | x right: " + (location[0] + cvh.getAah_vi().getWidth()) + " | y: " + location[1] + " | y bottom: " + (location[1] + cvh.getAah_vi().getHeight()));
 //                                Log.d("trace", i + " contains: " + rect_parent.contains(rect_child));
-                                if (!foundFirstVideo && rect_parent.contains(rect_child)) {
+                                float rect_parent_area = (rect_child.right - rect_child.left) * (rect_child.bottom - rect_child.top);
+                                float x_overlap = Math.max(0, Math.min(rect_child.right, rect_parent.right) - Math.max(rect_child.left, rect_parent.left));
+                                float y_overlap = Math.max(0, Math.min(rect_child.bottom, rect_parent.bottom) - Math.max(rect_child.top, rect_parent.top));
+                                float overlapArea = x_overlap * y_overlap;
+                                float percent = (overlapArea / rect_parent_area) * 100.0f;
+                                if (!foundFirstVideo && percent >= visiblePercent) {
 //                                    Log.d("trace", i + " foundFirstVideo: " + cvh.getVideoUrl());
                                     foundFirstVideo = true;
                                     if (getString(_act, cvh.getVideoUrl()) != null && new File(getString(_act, cvh.getVideoUrl())).exists()) {
@@ -154,7 +161,12 @@ public class AAH_CustomRecyclerView extends RecyclerView {
                                 Rect rect_child = new Rect(location[0], location[1], location[0] + cvh.getAah_vi().getWidth(), location[1] + cvh.getAah_vi().getHeight());
 //                                        Log.d("k9pos", "x: " + location[0] + " | x right: " + (location[0] + cvh.getAah_vi().getWidth()) + " | y: " + location[1] + " | y bottom: " + (location[1] + cvh.getAah_vi().getHeight()));
 //                                Log.d("trace", i + " contains: " + rect_parent.contains(rect_child));
-                                if (rect_parent.contains(rect_child)) {
+                                float rect_parent_area = (rect_child.right - rect_child.left) * (rect_child.bottom - rect_child.top);
+                                float x_overlap = Math.max(0, Math.min(rect_child.right, rect_parent.right) - Math.max(rect_child.left, rect_parent.left));
+                                float y_overlap = Math.max(0, Math.min(rect_child.bottom, rect_parent.bottom) - Math.max(rect_child.top, rect_parent.top));
+                                float overlapArea = x_overlap * y_overlap;
+                                float percent = (overlapArea / rect_parent_area) * 100.0f;
+                                if (percent >= visiblePercent) {
                                     if (getString(_act, cvh.getVideoUrl()) != null && new File(getString(_act, cvh.getVideoUrl())).exists()) {
                                         ((AAH_CustomViewHolder) holder).initVideoView(getString(_act, cvh.getVideoUrl()), _act);
                                     } else {
@@ -185,7 +197,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
             }
         } else if (runnables.size() > 0) {
             for (Runnable t : runnables) {
-               handler.removeCallbacksAndMessages(t);
+                handler.removeCallbacksAndMessages(t);
             }
             runnables.clear();
             handlerThread.quit();
@@ -203,7 +215,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void startDownloadInBackground(String url) {
-        if(!AAH_Utils.isConnected(_act)) return;
+        if (!AAH_Utils.isConnected(_act)) return;
         /* Starting Download Service */
         if ((AAH_Utils.getString(_act, url) == null || !(new File(getString(_act, url)).exists())) && url != null && !url.equalsIgnoreCase("null")) {
             Intent intent = new Intent(Intent.ACTION_SYNC, null, _act, AAH_DownloadService.class);
@@ -224,7 +236,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
     public void preDownload(List<String> urls) {
-        if(!AAH_Utils.isConnected(_act)) return;
+        if (!AAH_Utils.isConnected(_act)) return;
         HashSet<String> hashSet = new HashSet<String>();
         hashSet.addAll(urls);
         urls.clear();
@@ -245,7 +257,6 @@ public class AAH_CustomRecyclerView extends RecyclerView {
     }
 
 
-
     public void stopVideos() {
         for (int i = 0; i < getChildCount(); i++) {
             if (findViewHolderForAdapterPosition(i) instanceof AAH_CustomViewHolder) {
@@ -257,5 +268,7 @@ public class AAH_CustomRecyclerView extends RecyclerView {
         }
     }
 
-
+    public void setVisiblePercent(float visiblePercent) {
+        this.visiblePercent = visiblePercent;
+    }
 }

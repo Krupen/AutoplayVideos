@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setDownloadVideos(true); // false by default
 
+        recyclerView.setVisiblePercent(50); // percentage of View that needs to be visible to start playing
+
         //extra - start downloading all videos in background before loading RecyclerView
         List<String> urls = new ArrayList<>();
         for (MyModel object : modelList) {
