@@ -43,7 +43,7 @@ allprojects {
 
 ``` groovy
 dependencies {
-	 compile 'com.allattentionhere:autoplayvideos:0.1.9'
+	 compile 'com.allattentionhere:autoplayvideos:0.2.0'
 }
 ```
 
@@ -53,7 +53,7 @@ dependencies {
 <dependency>
   <groupId>com.allattentionhere</groupId>
   <artifactId>autoplayvideos</artifactId>
-  <version>0.1.9</version>
+  <version>0.2.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -260,6 +260,11 @@ Call the following method to resume videos when App resumes (opening app after m
     }
 ```
 
+### Play partially visible video (Optional)
+Call the following method to set the percentage of view that needs to be visible for video to start playing.
+```
+    recyclerView.setVisiblePercent(50);
+```
 
 ### Get callbacks when videos starts and pauses
 You can override the below methods of `AAH_CustomViewHolder` to get callback when video starts to play or pauses.
