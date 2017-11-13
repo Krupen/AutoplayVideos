@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 0.1.9 *(2017-11-02)*
+----------------------------
+
+ * Added Support for multiple ViewTypes in RecyclerView.
+ 
 Version 0.1.8 *(2017-10-21)*
 ----------------------------
 
